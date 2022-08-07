@@ -19,7 +19,7 @@
     pip install pillow
 
 ### 4. 프로젝트 폴더 위치로 이동 (manage.py 파일이 있는 위치)
-    cd cloud
+    cd fillme
 
 ### 5. DB 마이그레이션
     python manage.py makemigrations
@@ -100,7 +100,7 @@
     }
 
 ### 다른 유저 프로필 조회
-### 128.0.0.1:8000/mypage/<int:id> - PATCH 메소드 사용
+### 128.0.0.1:8000/mypage/<int:id> - GET 메소드 사용
 #### 결과
     {
         "user" : "유저의 id 값(정수)",
