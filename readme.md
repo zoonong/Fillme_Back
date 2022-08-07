@@ -1,7 +1,7 @@
 ## 프로젝트 실행 방법(순서대로 진행하기)
 
 ### 1. 레퍼지토리 클론
-    git clone https://github.com/OIDC-JT/NBP_back.git
+    git clone https://github.com/LikeLion-at-DGU/Fillme_Back.git
 
 ### 2. 가상환경 실행
     source myvenv/Scripts/activate
@@ -70,6 +70,8 @@
 
 #### 프로필 사진은 파일 형식
 #### color는 선택지가 있음
+#### 프론트에서 가져올때 : profile.category 는 키값(ex. 'pink'), profile.get_category_display 는 내용(ex. '#FEBCC0')
+
     COLOR_LIST = (
             ('pink', '#FEBCC0'),
             ('red', '#83333E'),
