@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.db import models
 from django.dispatch import receiver
 from accounts.models import User
@@ -45,5 +46,5 @@ class Persona(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    memo = models.CharField(max_length=100)
+    category = models.CharField(max_length=100)
     image = models.ImageField(upload_to = "mypage/", blank=True, null=True)

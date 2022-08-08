@@ -119,7 +119,7 @@
             "user": "user id 값",
             "profile": "profile id 값",
             "name": "persona 1 이름",
-            "memo": "persona 1 한줄소개",
+            "category": "persona 1 카테고리",
             "image": "persona 1 이미지"
         },
         {
@@ -127,7 +127,7 @@
             "user": "user id 값",
             "profile": "profile id 값",
             "name": "persona 2 이름",
-            "memo": "persona 2 한줄소개",
+            "category": "persona 2 카테고리",
             "image": "persona 2 이미지"
         }
     ]
@@ -136,7 +136,7 @@
 ### 128.0.0.1:8000/mypage/persona - POST 메소드 사용
     {
         "name" : "페르소나 이름",
-        "memo" : "한줄소개",
+        "category" : "카테고리",
         "image" : "페르소나 사진"
     }
 
@@ -148,7 +148,7 @@
         "user": "user id 값",
         "profile": "profile id 값",
         "name": "persona 2 이름",
-        "memo": "persona 2 한줄소개",
+        "category": "persona 2 카테고리",
         "image": "persona 2 이미지"
     }
 
@@ -156,7 +156,7 @@
 ### 128.0.0.1:8000/mypage/persona/<int:persona_id> - PATCH 메소드 사용
     {
         "name" : "페르소나 이름",
-        "memo" : "한줄소개",
+        "category" : "카테고리",
         "image" : "페르소나 사진"
     }
 
@@ -176,7 +176,7 @@
             "user": "user id 값",
             "profile": "profile id 값",
             "name": "persona 1 이름",
-            "memo": "persona 1 한줄소개",
+            "category": "persona 1 카테고리",
             "image": "persona 1 이미지"
         },
         {
@@ -184,7 +184,7 @@
             "user": "user id 값",
             "profile": "profile id 값",
             "name": "persona 2 이름",
-            "memo": "persona 2 한줄소개",
+            "category": "persona 2 카테고리",
             "image": "persona 2 이미지"
         }
     ]
@@ -197,6 +197,6 @@
         "user": "user id 값",
         "profile": "profile id 값",
         "name": "persona 1 이름",
-        "memo": "persona 1 한줄소개",
+        "category": "persona 1 카테고리",
         "image": "persona 1 이미지"
     }
