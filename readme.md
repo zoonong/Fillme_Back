@@ -100,7 +100,7 @@
     }
 
 ### 다른 유저 프로필 조회
-### 128.0.0.1:8000/mypage/<int:id> - GET 메소드 사용
+### 128.0.0.1:8000/mypage/<int:user_id> - GET 메소드 사용
 #### 결과
     {
         "user" : "유저의 id 값(정수)",
@@ -108,4 +108,95 @@
         "memo" : "한줄소개",
         "color" : "색상",
         "image" : "프로필 사진"
+    }
+
+### 본인 페르소나 조회
+### 128.0.0.1:8000/mypage/persona - GET 메소드 사용
+#### 결과
+    [
+        {
+            "id": "persona id 값",
+            "user": "user id 값",
+            "profile": "profile id 값",
+            "name": "persona 1 이름",
+            "memo": "persona 1 한줄소개",
+            "image": "persona 1 이미지"
+        },
+        {
+            "id": "persona id 값",
+            "user": "user id 값",
+            "profile": "profile id 값",
+            "name": "persona 2 이름",
+            "memo": "persona 2 한줄소개",
+            "image": "persona 2 이미지"
+        }
+    ]
+
+### 본인 페르소나 생성하기
+### 128.0.0.1:8000/mypage/persona - POST 메소드 사용
+    {
+        "name" : "페르소나 이름",
+        "memo" : "한줄소개",
+        "image" : "페르소나 사진"
+    }
+
+### 본인 페르소나 조회하기(페르소나 detail)
+### 128.0.0.1:8000/mypage/persona/<int:persona_id> - GET 메소드 사용
+#### 결과
+    {
+        "id": "persona id 값",
+        "user": "user id 값",
+        "profile": "profile id 값",
+        "name": "persona 2 이름",
+        "memo": "persona 2 한줄소개",
+        "image": "persona 2 이미지"
+    }
+
+### 본인 페르소나 수정하기
+### 128.0.0.1:8000/mypage/persona/<int:persona_id> - PATCH 메소드 사용
+    {
+        "name" : "페르소나 이름",
+        "memo" : "한줄소개",
+        "image" : "페르소나 사진"
+    }
+
+### 본인 페르소나 삭제하기
+### 128.0.0.1:8000/mypage/persona/<int:persona_id> - DELETE 메소드 사용
+### 결과
+    {
+        "persona_id": "삭제된 페르소나 id"
+    }
+
+### 다른 유저 페르소나 목록 조회하기
+### 128.0.0.1:8000/mypage/<int:user_id>/persona - GET 메소드 사용
+#### 결과
+    [
+        {
+            "id": "persona id 값",
+            "user": "user id 값",
+            "profile": "profile id 값",
+            "name": "persona 1 이름",
+            "memo": "persona 1 한줄소개",
+            "image": "persona 1 이미지"
+        },
+        {
+            "id": "persona id 값",
+            "user": "user id 값",
+            "profile": "profile id 값",
+            "name": "persona 2 이름",
+            "memo": "persona 2 한줄소개",
+            "image": "persona 2 이미지"
+        }
+    ]
+
+### 다른 유저 페르소나 조회하기(persona detail)
+### 128.0.0.1:8000/mypage/<int:user_id>/persona/<int:persona_id> - GET 메소드 사용
+#### 결과
+    {
+        "id": "persona id 값",
+        "user": "user id 값",
+        "profile": "profile id 값",
+        "name": "persona 1 이름",
+        "memo": "persona 1 한줄소개",
+        "image": "persona 1 이미지"
     }
