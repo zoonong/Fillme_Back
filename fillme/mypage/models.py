@@ -26,7 +26,7 @@ class Profile(models.Model):
         ('black', '#010101'),
     )
     color = models.CharField(max_length=10, choices=COLOR_LIST, blank=True, null=True)
-    ## 프론트에서 가져올때 : profile.category 는 키값, profile.get_category_display 는 내용
+    ## 프론트에서 가져올때 : profile.color 는 키값, profile.get_color_display() 는 내용
     image = models.ImageField(upload_to = "mypage/", blank=True, null=True)
     followings = models.ManyToManyField("self", related_name="followers", symmetrical=False)
 

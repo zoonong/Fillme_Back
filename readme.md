@@ -70,7 +70,7 @@
 
 #### 프로필 사진은 파일 형식
 #### color는 선택지가 있음
-#### 프론트에서 가져올때 : profile.category 는 키값(ex. 'pink'), profile.get_category_display 는 내용(ex. '#FEBCC0')
+#### 프론트에서 가져올때 : profile.color 는 키값(ex. 'pink'), profile.get_color_display() 는 내용(ex. '#FEBCC0')
 
     COLOR_LIST = (
             ('pink', '#FEBCC0'),
