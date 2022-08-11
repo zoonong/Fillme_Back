@@ -7,22 +7,17 @@ class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.id')
     class Meta:
         model = Profile
-        fields = ['user','fullname', 'memo', 'color', 'image']
+        fields = '__all__'
 
 
 class PersonaSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source = 'user.id')
-    profile = serializers.ReadOnlyField(source = 'profile.id')
     class Meta:
         model = Persona
         fields = '__all__'
 
-# class ProfilepersonaSerializer(serializers.ModelSerializer):
-#     user = serializers.ReadOnlyField(source = 'user.id')
-#     profile = serializers.ReadOnlyField(source = 'profile.id')
-#     personas = profile.persona_set.all()
-#     persona = PersonaSerializer(many = True, read_only = True)
-#     persona_count = serializers.IntegerField(source='persona.count',read_only=True)
-#     class Meta:
-#         model = Profile
-#         fields = ['user','profile','persona']
+class ProfilepersonaSerializer(serializers.ModelSerializer):
+    personas = PersonaSerializer(many = True, read_only = True)
+    persona_count = serializers.IntegerField(source='personas.count',read_only=True)
+    class Meta:
+        model = Profile
+        fields = ['id','user','fullname', 'memo', 'color', 'image', 'followings', 'personas', 'persona_count']

@@ -61,11 +61,13 @@
 ### 127.0.0.1:8000/mypage - GET 메소드 사용
 #### 결과
     {
+        "id" : "해당 프로필의 id 값(정수)",
         "user" : "유저의 id 값(정수)",
         "fullname" : "성명",
         "memo" : "한줄소개",
         "color" : "색상",
         "image" : "프로필 사진"
+        "followings" : []
     }
 
 #### 프로필 사진은 파일 형식
@@ -103,11 +105,13 @@
 ### 128.0.0.1:8000/mypage/<int:user_id> - GET 메소드 사용
 #### 결과
     {
+        "id" : "해당 프로필의 id 값(정수)"
         "user" : "유저의 id 값(정수)",
         "fullname" : "성명",
         "memo" : "한줄소개",
         "color" : "색상",
-        "image" : "프로필 사진"
+        "image" : "프로필 사진",
+        "followings" : []
     }
 
 ### 본인 페르소나 조회
@@ -229,4 +233,72 @@
         "category": "persona 1 카테고리",
         "image": "persona 1 이미지",
         "openpublic": true
+    }
+
+### 나의 프로필과 페르소나 한번에 조회하기
+### 128.0.0.1:8000/mypage/profile_persona - GET 메소드 사용
+#### 결과
+    {
+        "id": "해당 프로필 id 값(정수)",
+        "user": "해당 유저의 id 값(정수)",
+        "fullname": "프로필 성명",
+        "memo": "프로필 한줄 소개",
+        "color": "색상",
+        "image": "이미지",
+        "followings": [],
+        "personas": [
+            {
+                "id": "해당 페르소나의 id값(정수)",
+                "name": "해당 페르소나 이름",
+                "category": "해당 페르소나 카테고리",
+                "image": "이미지",
+                "openpublic": "공개여부(true/false)",
+                "user": "해당 페르소나의 유저의 id값(정수)",
+                "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
+            },
+            {
+                "id": "해당 페르소나의 id값(정수)",
+                "name": "해당 페르소나 이름",
+                "category": "해당 페르소나 카테고리",
+                "image": "이미지",
+                "openpublic": "공개여부(true/false)",
+                "user": "해당 페르소나의 유저의 id값(정수)",
+                "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
+            }
+        ],
+        "persona_count": "해당 유저가 가지고 있는 페르소나 개수(정수)"
+    }
+
+### 다른 유저의 프로필과 페르소나 한번에 조회하기
+### 128.0.0.1:8000/mypage/profile_persona/<int:user_id> - GET 메소드 사용
+#### 결과
+    {
+        "id": "해당 프로필 id 값(정수)",
+        "user": "해당 유저의 id 값(정수)",
+        "fullname": "프로필 성명",
+        "memo": "프로필 한줄 소개",
+        "color": "색상",
+        "image": "이미지",
+        "followings": [],
+        "personas": [
+            {
+                "id": "해당 페르소나의 id값(정수)",
+                "name": "해당 페르소나 이름",
+                "category": "해당 페르소나 카테고리",
+                "image": "이미지",
+                "openpublic": "공개여부(true/false)",
+                "user": "해당 페르소나의 유저의 id값(정수)",
+                "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
+            },
+            {
+                "id": "해당 페르소나의 id값(정수)",
+                "name": "해당 페르소나 이름",
+                "category": "해당 페르소나 카테고리",
+                "image": "이미지",
+                "openpublic": "공개여부(true/false)",
+                "user": "해당 페르소나의 유저의 id값(정수)",
+                "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
+            }
+        ],
+        "persona_count": "해당 유저가 가지고 있는 페르소나 개수(정수)"
     }

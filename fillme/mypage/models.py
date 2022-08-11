@@ -45,7 +45,7 @@ def save_user_profile(sender, instance, **kwargs):
 class Persona(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, related_name='personas', on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     category = models.CharField(max_length=100)
     image = models.ImageField(upload_to = "mypage/", blank=True, null=True)

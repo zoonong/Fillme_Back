@@ -96,23 +96,23 @@ def user_persona_detail(request, user_id, persona_id):
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
 
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticatedOrReadOnly])
-# def my_profile_persona(request):
-#     user = request.user
-#     if request.method == 'GET':
-#         profile = Profile.objects.get(user=user)
-#         serializer = ProfilepersonaSerializer(profile)
-#         return Response(data=serializer.data)
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def my_profile_persona(request):
+    user = request.user
+    if request.method == 'GET':
+        profile = Profile.objects.get(user=user)
+        serializer = ProfilepersonaSerializer(profile)
+        return Response(data=serializer.data)
 
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticatedOrReadOnly])
-# def user_profile_persona(request, user_id):
-#     user = User.objects.get(pk=user_id)
-#     if request.method == 'GET':
-#         profile = Profile.objects.get(user=user)
-#         serializer = ProfilepersonaSerializer(profile)
-#         return Response(data=serializer.data)
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def user_profile_persona(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if request.method == 'GET':
+        profile = Profile.objects.get(user=user)
+        serializer = ProfilepersonaSerializer(profile)
+        return Response(data=serializer.data)
 
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticatedOrReadOnly])
