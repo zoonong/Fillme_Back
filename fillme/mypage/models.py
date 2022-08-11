@@ -1,3 +1,4 @@
+from tkinter.tix import Tree
 from unicodedata import category
 from django.db import models
 from django.dispatch import receiver
@@ -48,3 +49,4 @@ class Persona(models.Model):
     name = models.CharField(max_length=30)
     category = models.CharField(max_length=100)
     image = models.ImageField(upload_to = "mypage/", blank=True, null=True)
+    openpublic = models.BooleanField(default=True)

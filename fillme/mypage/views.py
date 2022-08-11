@@ -95,3 +95,38 @@ def user_persona_detail(request, user_id, persona_id):
     if request.method == 'GET':
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticatedOrReadOnly])
+# def my_profile_persona(request):
+#     user = request.user
+#     if request.method == 'GET':
+#         profile = Profile.objects.get(user=user)
+#         serializer = ProfilepersonaSerializer(profile)
+#         return Response(data=serializer.data)
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticatedOrReadOnly])
+# def user_profile_persona(request, user_id):
+#     user = User.objects.get(pk=user_id)
+#     if request.method == 'GET':
+#         profile = Profile.objects.get(user=user)
+#         serializer = ProfilepersonaSerializer(profile)
+#         return Response(data=serializer.data)
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def persona_public(request, persona_id):
+    user = request.user
+    persona = get_object_or_404(Persona, pk = persona_id)
+    if request.method == 'PATCH':
+        if persona.openpublic == True:
+            serializer = PersonaSerializer(data={"name":persona.name, "category":persona.category, "openpublic":"False"},instance=persona)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            return Response(data=serializer.data)
+        else:
+            serializer = PersonaSerializer(data={"name":persona.name, "category":persona.category, "openpublic":"True"},instance=persona)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            return Response(data=serializer.data)

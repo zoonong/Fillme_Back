@@ -121,6 +121,7 @@
             "name": "persona 1 이름",
             "category": "persona 1 카테고리",
             "image": "persona 1 이미지"
+            "openpublic": true
         },
         {
             "id": "persona id 값",
@@ -129,6 +130,7 @@
             "name": "persona 2 이름",
             "category": "persona 2 카테고리",
             "image": "persona 2 이미지"
+            "openpublic": true
         }
     ]
 
@@ -149,7 +151,8 @@
         "profile": "profile id 값",
         "name": "persona 2 이름",
         "category": "persona 2 카테고리",
-        "image": "persona 2 이미지"
+        "image": "persona 2 이미지",
+        "openpublic": true
     }
 
 ### 본인 페르소나 수정하기
@@ -177,7 +180,8 @@
             "profile": "profile id 값",
             "name": "persona 1 이름",
             "category": "persona 1 카테고리",
-            "image": "persona 1 이미지"
+            "image": "persona 1 이미지",
+            "openpublic": true
         },
         {
             "id": "persona id 값",
@@ -185,7 +189,8 @@
             "profile": "profile id 값",
             "name": "persona 2 이름",
             "category": "persona 2 카테고리",
-            "image": "persona 2 이미지"
+            "image": "persona 2 이미지",
+            "openpublic": true
         }
     ]
 
@@ -198,5 +203,30 @@
         "profile": "profile id 값",
         "name": "persona 1 이름",
         "category": "persona 1 카테고리",
-        "image": "persona 1 이미지"
+        "image": "persona 1 이미지",
+        "openpublic": true
+    }
+
+### 나의 페르소나 공개 여부 설정(persona detail)
+### 128.0.0.1:8000/mypage/persona/<int:persona_id>/openpublic/ - PATCH 메소드 사용
+    입력값 아무것도 없이 patch 메소드로 request 보내면 됨.
+#### 결과(공개->비공개 전환 시 openpublic이 true에서 false로 변경됨)
+    {
+        "id": "persona id 값",
+        "user": "user id 값",
+        "profile": "profile id 값",
+        "name": "persona 1 이름",
+        "category": "persona 1 카테고리",
+        "image": "persona 1 이미지",
+        "openpublic": false
+    }
+#### 결과(비공개->공개 전환 시 openpublic이 false에서 true로 변경됨)
+    {
+        "id": "persona id 값",
+        "user": "user id 값",
+        "profile": "profile id 값",
+        "name": "persona 1 이름",
+        "category": "persona 1 카테고리",
+        "image": "persona 1 이미지",
+        "openpublic": true
     }
