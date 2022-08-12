@@ -5,7 +5,7 @@ from mypage.models import Persona
 # Create your models here.
 class Post(models.Model):
     id = models.AutoField(primary_key = True)
-    writer = models.ForeignKey(User, on_delete = models.CASCADE)
+    writer = models.ForeignKey(User, null = True, blank = True, on_delete = models.CASCADE)
     persona = models.ForeignKey(Persona, on_delete = models.CASCADE)
     title = models.CharField(max_length = 200)
     content = models.TextField()
@@ -14,10 +14,15 @@ class Post(models.Model):
     # 사진, 영상 필드 추가해야 함(사진은 image 모델 새로 생성해서 할 듯...!)
     # 좋아요 기능 추가해야 함
 
+class PostImage(models.Model):
+    id = models.AutoField(primary_key = True)
+    post = models.ForeignKey(Post, on_delete = models.CASCADE)
+    image = models.ImageField(upload_to="post/%Y/%m/%d", blank = True, null = True)
+
 class Comment(models.Model):
     id = models.AutoField(primary_key = True)
     post = models.ForeignKey(Post, on_delete = models.CASCADE)
-    writer = models.ForeignKey(User, on_delete = models.CASCADE)
+    writer = models.ForeignKey(User, null = True, blank = True, on_delete = models.CASCADE, related_name = 'comment')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)

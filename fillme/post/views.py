@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 
 from .models import Post, Comment
-from .serializers import CommentSerializer, PostSerializer
+from .serializers import CommentSerializer, PostSerializer, PostImageSerializer
 
 # Create your views here.
 
@@ -56,12 +56,21 @@ def post_detail_update_delete(request, post_pk):
 # COMMENT(댓글) 관련
 
 # 모든 댓글 리스트 가져 오기
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def comment_list(request):
-    comments = get_object_or_404(Comment)
-    serializer = CommentSerializer(comments, many = True)
-    return Response(serializer.data)
+
+    if request.method == 'GET':
+        comments = get_object_or_404(Comment)
+        serializer = CommentSerializer(comments, many = True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        serializer = CommentSerializer(data = request.data)
+
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(data = serializer.data)
 
 # 특정 댓글 가져 오기 / 삭제 / 수정
 @api_view(['GET', 'DELETE', 'PATCH'])
