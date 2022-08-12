@@ -75,6 +75,8 @@ def my_persona_rud(request, persona_id):
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
     elif request.method == "PATCH":
+        request.data['user'] = user.id
+        request.data['profile'] = profile.id
         serializer=PersonaSerializer(data=request.data,instance=persona)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -155,4 +157,31 @@ def random_user_list(request):
         else:
             profiles = Profile.objects.all().order_by('?')[:5]
             serializer = ProfilepersonaSerializer(profiles, many=True)
+        return Response(data=serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def following_list(request):
+    user = request.user
+    # followings = user.profile.followings.all()
+    if request.method == 'GET':
+        serializer = FollowingSerializer(user.profile)
+        return Response(data=serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def follow(request,user_id):
+    user = request.user
+    followed_user = get_object_or_404(User, pk = user_id)
+    # followings = user.profile.followings.all()
+    is_follower = user.profile in followed_user.profile.followers.all()
+    if request.method == 'POST':
+        if is_follower:
+            user.profile.followings.remove(followed_user.profile)
+            serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
+        else:
+            user.profile.followings.add(followed_user.profile)
+            serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
+        if serializer.is_valid():
+            serializer.save()
         return Response(data=serializer.data)

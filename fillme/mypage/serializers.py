@@ -7,8 +7,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.id')
     class Meta:
         model = Profile
-        fields = '__all__'
-
+        fields = ['id','user','fullname', 'memo', 'color', 'image']
 
 class PersonaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +20,8 @@ class ProfilepersonaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id','user','fullname', 'memo', 'color', 'image', 'personas', 'persona_count']
+
+class FollowingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['followings']

@@ -13,5 +13,7 @@ urlpatterns = [
    path('<int:user_id>/persona/<int:persona_id>/',user_persona_detail,name='user_persona_detail'),
    path('profile_persona/',my_profile_persona,name='my_profile_persona'),
    path('profile_persona/<int:user_id>/',user_profile_persona,name='user_profile_persona'),
-   path('random_profile/',random_user_list, name='random_user_list')
+   path('random_profile/',random_user_list, name='random_user_list'),
+   path('following_list/',following_list,name='following_list'),
+   path('follow/<int:user_id>',follow,name='follow'),
 ]
