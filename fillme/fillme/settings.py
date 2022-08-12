@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # apps
     'accounts',
     'mypage',
+    'post',
 
     # user auth
     'rest_framework_simplejwt.token_blacklist',
