@@ -20,4 +20,4 @@ class ProfilepersonaSerializer(serializers.ModelSerializer):
     persona_count = serializers.IntegerField(source='personas.count',read_only=True)
     class Meta:
         model = Profile
-        fields = ['id','user','fullname', 'memo', 'color', 'image', 'followings', 'personas', 'persona_count']
+        fields = ['id','user','fullname', 'memo', 'color', 'image', 'personas', 'persona_count']
