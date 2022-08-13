@@ -66,6 +66,7 @@
         "fullname" : "성명",
         "memo" : "한줄소개",
         "color" : "색상",
+        "color_hex" : "색상 hex값",
         "image" : "프로필 사진"
         "followings" : []
     }
@@ -110,6 +111,7 @@
         "fullname" : "성명",
         "memo" : "한줄소개",
         "color" : "색상",
+        "color_hex" : "색상 hex값",
         "image" : "프로필 사진",
         "followings" : []
     }
@@ -244,6 +246,7 @@
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
+        "color_hex" : "색상 hex값",
         "image": "이미지",
         "followings": [],
         "personas": [
@@ -278,6 +281,7 @@
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
+        "color_hex" : "색상 hex값",
         "image": "이미지",
         "followings": [],
         "personas": [
@@ -313,6 +317,7 @@
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
+        "color_hex" : "색상 hex값",
         "image": "이미지",
         "followings": [],
         "personas": [
@@ -343,6 +348,7 @@
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
+        "color_hex" : "색상 hex값",
         "image": "이미지",
         "followings": [],
         "personas": [
@@ -373,6 +379,7 @@
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
+        "color_hex" : "색상 hex값",
         "image": "이미지",
         "followings": [],
         "personas": [
@@ -403,6 +410,7 @@
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
+        "color_hex" : "색상 hex값",
         "image": "이미지",
         "followings": [],
         "personas": [
@@ -433,6 +441,7 @@
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
+        "color_hex" : "색상 hex값",
         "image": "이미지",
         "followings": [],
         "personas": [
