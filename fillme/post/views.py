@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Post, Comment
-from .serializers import CommentSerializer, PostSerializer, LikeSerializer
+from .serializers import CommentSerializer, PostSerializer, LikeSerializer, PostLikeSerializer
 
 # Create your views here.
 
@@ -107,8 +107,8 @@ def post_comment_detail_update_delete(request, post_pk, comment_pk):
                 serializer.save(post = post) # 해당 글에 댓글 쓰기
             return Response(serializer.data)
 
-    elif request.method == 'DELETE': # 자신의 게시물 속 댓글은 모두 삭제 가능(타인의 것이라도) 문제) 아예 다른 사람도 됨
-        if user == comment.writer or post.writer:
+    elif request.method == 'DELETE': # 자신의 게시물 속 댓글은 모두 삭제 가능(타인의 것이라도)
+        if user == comment.writer or user == post.writer:
             comment.delete()
             return Response({'comment':comment_pk})
 
@@ -118,7 +118,7 @@ def post_comment_detail_update_delete(request, post_pk, comment_pk):
 @permission_classes([IsAuthenticatedOrReadOnly])
 def post_likes(request, post_pk):
     post = get_object_or_404(Post, pk = post_pk) # 해당 게시물
-    serializer = LikeSerializer(post) # LikeSerializer 사용 = id, title, content, like_num의 데이터만 출력
+    serializer = PostLikeSerializer(post)
     return Response(data = serializer.data)
 
 # 2. 해당 게시물 속 좋아요 누르기 / 취소하기
@@ -137,7 +137,7 @@ def send_like(request, post_pk):
             if num < 0:
                 num = 0
             post_like.save()
-            serializer = PostSerializer(instance=post_like, data ={"persona":post_like.persona.id, "title":post_like.title, "content":post_like.content, 'like_num':num})
+            serializer = LikeSerializer(instance=post_like, data ={"persona":post_like.persona.id, "title":post_like.title, "content":post_like.content, 'like_num':num})
 
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
@@ -150,7 +150,7 @@ def send_like(request, post_pk):
             if num < 0:
                 num = 0
             post_like.save()
-            serializer = PostSerializer(instance=post_like, data ={"persona":post_like.persona.id, "title":post_like.title, "content":post_like.content, 'like_num':num})
+            serializer = LikeSerializer(instance=post_like, data ={"persona":post_like.persona.id, "title":post_like.title, "content":post_like.content, 'like_num':num})
 
             if serializer.is_valid(raise_exception=True):
                 serializer.save()

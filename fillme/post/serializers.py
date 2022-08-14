@@ -11,7 +11,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     comment_set = CommentSerializer(many=True, read_only=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
-    # post_like = LikeSerializer(many=True, read_only=True, source="like_set")
     class Meta:
         model = Post
         fields = [
@@ -38,9 +37,27 @@ class PostSerializer(serializers.ModelSerializer):
                 'updated_at'
             ]
 
-# 좋아요 전체 수만 보이게
+# 좋아요
 class LikeSerializer(serializers.ModelSerializer):
-    # post_like_num = PostSerializer(many = True)
+    comment_set = CommentSerializer(many=True, read_only=True)
+    comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content', 'like_num']
+        fields = [                
+                'id',
+                'writer',
+                'persona',
+                'title',
+                'content',
+                'like_num',
+                'comment_set',
+                'comment_count',
+                'created_at',
+                'updated_at'
+                ]
+
+# 해당 게시물 좋아요 수만 보이는 시리얼라이저
+class PostLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'like_num']
