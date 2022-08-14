@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import *
 from .models import *
+from accounts.models import *
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 
@@ -53,9 +54,7 @@ def my_persona_list_create(request):
     user = request.user
     profile = user.profile
     if request.method=="POST":
-        request.data['user'] = user.id
-        request.data['profile'] = profile.id
-        serializer = PersonaSerializer(data=request.data)
+        serializer = PersonaSerializer(data={'user':user.id, 'profile':profile.id, 'name':request.data['name'], 'category':request.data['category']})
         if serializer.is_valid(raise_exception=True):
             serializer.save() 
         return Response(serializer.data)
@@ -75,9 +74,7 @@ def my_persona_rud(request, persona_id):
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
     elif request.method == "PATCH":
-        request.data['user'] = user.id
-        request.data['profile'] = profile.id
-        serializer=PersonaSerializer(data=request.data,instance=persona)
+        serializer=PersonaSerializer(data={'user':user.id, 'profile':profile.id, 'name':request.data['name'], 'category':request.data['category']},instance=persona)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         return Response(serializer.data)
@@ -174,13 +171,18 @@ def follow(request,user_id):
     user = request.user
     followed_user = get_object_or_404(User, pk = user_id)
     # followings = user.profile.followings.all()
+    subfollowings = followed_user.persona.all()
     is_follower = user.profile in followed_user.profile.followers.all()
     if request.method == 'POST':
         if is_follower:
             user.profile.followings.remove(followed_user.profile)
+            for subfollow in subfollowings:
+                user.profile.subfollowings.remove(subfollow)
             serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
         else:
             user.profile.followings.add(followed_user.profile)
+            for subfollow in subfollowings:
+                user.profile.subfollowings.add(subfollow)
             serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
         if serializer.is_valid():
             serializer.save()
