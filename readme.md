@@ -63,6 +63,7 @@
     {
         "id" : "해당 프로필의 id 값(정수)",
         "user" : "유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname" : "성명",
         "memo" : "한줄소개",
         "color" : "색상",
@@ -108,6 +109,7 @@
     {
         "id" : "해당 프로필의 id 값(정수)"
         "user" : "유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname" : "성명",
         "memo" : "한줄소개",
         "color" : "색상",
@@ -123,6 +125,7 @@
         {
             "id": "persona id 값",
             "user": "user id 값",
+            "username" : "로그인할때 사용되는 사용자 아이디",
             "profile": "profile id 값",
             "name": "persona 1 이름",
             "category": "persona 1 카테고리",
@@ -132,6 +135,7 @@
         {
             "id": "persona id 값",
             "user": "user id 값",
+            "username" : "로그인할때 사용되는 사용자 아이디",
             "profile": "profile id 값",
             "name": "persona 2 이름",
             "category": "persona 2 카테고리",
@@ -154,6 +158,7 @@
     {
         "id": "persona id 값",
         "user": "user id 값",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "profile": "profile id 값",
         "name": "persona 2 이름",
         "category": "persona 2 카테고리",
@@ -183,6 +188,7 @@
         {
             "id": "persona id 값",
             "user": "user id 값",
+            "username" : "로그인할때 사용되는 사용자 아이디",
             "profile": "profile id 값",
             "name": "persona 1 이름",
             "category": "persona 1 카테고리",
@@ -192,6 +198,7 @@
         {
             "id": "persona id 값",
             "user": "user id 값",
+            "username" : "로그인할때 사용되는 사용자 아이디",
             "profile": "profile id 값",
             "name": "persona 2 이름",
             "category": "persona 2 카테고리",
@@ -206,6 +213,7 @@
     {
         "id": "persona id 값",
         "user": "user id 값",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "profile": "profile id 값",
         "name": "persona 1 이름",
         "category": "persona 1 카테고리",
@@ -220,6 +228,7 @@
     {
         "id": "persona id 값",
         "user": "user id 값",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "profile": "profile id 값",
         "name": "persona 1 이름",
         "category": "persona 1 카테고리",
@@ -230,6 +239,7 @@
     {
         "id": "persona id 값",
         "user": "user id 값",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "profile": "profile id 값",
         "name": "persona 1 이름",
         "category": "persona 1 카테고리",
@@ -243,6 +253,7 @@
     {
         "id": "해당 프로필 id 값(정수)",
         "user": "해당 유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
@@ -257,6 +268,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             },
             {
@@ -266,6 +278,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             }
         ],
@@ -278,6 +291,7 @@
     {
         "id": "해당 프로필 id 값(정수)",
         "user": "해당 유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
@@ -292,6 +306,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             },
             {
@@ -301,6 +316,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             }
         ],
@@ -314,6 +330,7 @@
     {
         "id": "해당 프로필 id 값(정수)",
         "user": "해당 유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
@@ -328,6 +345,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             },
             {
@@ -337,6 +355,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             }
         ],
@@ -359,6 +378,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             },
             {
@@ -368,6 +388,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             }
         ],
@@ -376,6 +397,7 @@
     {
         "id": "해당 프로필 id 값(정수)",
         "user": "해당 유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
@@ -390,6 +412,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             },
             {
@@ -399,6 +422,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             }
         ],
@@ -407,6 +431,7 @@
     {
         "id": "해당 프로필 id 값(정수)",
         "user": "해당 유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
@@ -421,6 +446,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             },
             {
@@ -430,6 +456,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             }
         ],
@@ -438,6 +465,7 @@
     {
         "id": "해당 프로필 id 값(정수)",
         "user": "해당 유저의 id 값(정수)",
+        "username" : "로그인할때 사용되는 사용자 아이디",
         "fullname": "프로필 성명",
         "memo": "프로필 한줄 소개",
         "color": "색상",
@@ -452,6 +480,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             },
             {
@@ -461,6 +490,7 @@
                 "image": "이미지",
                 "openpublic": "공개여부(true/false)",
                 "user": "해당 페르소나의 유저의 id값(정수)",
+                "username" : "로그인할때 사용되는 사용자 아이디",
                 "profile": "해당 페르소나의 유저의 프로필 id 값(정수)"
             }
         ],
