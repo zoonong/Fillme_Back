@@ -54,7 +54,13 @@ def my_persona_list_create(request):
     user = request.user
     profile = user.profile
     if request.method=="POST":
-        serializer = PersonaSerializer(data={'user':user.id, 'profile':profile.id, 'name':request.data['name'], 'category':request.data['category']})
+        serializer = PersonaSerializer(data={
+            'user':user.id,
+            'profile':profile.id,
+            'name':request.data['name'],
+            'category':request.data['category'],
+            'name':request.data['name'],
+            'image':request.data['image']})
         if serializer.is_valid(raise_exception=True):
             serializer.save() 
         return Response(serializer.data)
@@ -74,7 +80,13 @@ def my_persona_rud(request, persona_id):
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
     elif request.method == "PATCH":
-        serializer=PersonaSerializer(data={'user':user.id, 'profile':profile.id, 'name':request.data['name'], 'category':request.data['category']},instance=persona)
+        serializer=PersonaSerializer(data={
+            'user':user.id,
+            'profile':profile.id,
+            'name':request.data['name'],
+            'category':request.data['category'],
+            'name':request.data['name'],
+            'image':request.data['image']},instance=persona)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         return Response(serializer.data)
@@ -167,22 +179,17 @@ def following_list(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
-def follow(request,user_id):
+def follow(request,id):
     user = request.user
-    followed_user = get_object_or_404(User, pk = user_id)
+    followed_user = get_object_or_404(User, pk = id)
     # followings = user.profile.followings.all()
-    subfollowings = followed_user.persona.all()
     is_follower = user.profile in followed_user.profile.followers.all()
     if request.method == 'POST':
         if is_follower:
             user.profile.followings.remove(followed_user.profile)
-            for subfollow in subfollowings:
-                user.profile.subfollowings.remove(subfollow)
             serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
         else:
             user.profile.followings.add(followed_user.profile)
-            for subfollow in subfollowings:
-                user.profile.subfollowings.add(subfollow)
             serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
         if serializer.is_valid():
             serializer.save()
