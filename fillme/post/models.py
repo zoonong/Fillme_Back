@@ -9,7 +9,7 @@ class Post(models.Model):
     persona = models.ForeignKey(Persona, on_delete = models.CASCADE)
     title = models.CharField(max_length = 200)
     content = models.TextField()
-    image1 = models.ImageField(upload_to="post/", blank = True, null = True)
+    image1 = models.ImageField(upload_to="post/")  # 사진 한 장은 필수
     image2 = models.ImageField(upload_to="post/", blank = True, null = True)
     image3 = models.ImageField(upload_to="post/", blank = True, null = True)
     image4 = models.ImageField(upload_to="post/", blank = True, null = True)
