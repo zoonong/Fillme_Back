@@ -54,7 +54,13 @@ def my_persona_list_create(request):
     user = request.user
     profile = user.profile
     if request.method=="POST":
-        serializer = PersonaSerializer(data={'user':user.id, 'profile':profile.id, 'name':request.data['name'], 'category':request.data['category']})
+        serializer = PersonaSerializer(data={
+            'user':user.id,
+            'profile':profile.id,
+            'name':request.data['name'],
+            'category':request.data['category'],
+            'name':request.data['name'],
+            'image':request.data['image']})
         if serializer.is_valid(raise_exception=True):
             serializer.save() 
         return Response(serializer.data)
@@ -74,7 +80,13 @@ def my_persona_rud(request, persona_id):
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
     elif request.method == "PATCH":
-        serializer=PersonaSerializer(data={'user':user.id, 'profile':profile.id, 'name':request.data['name'], 'category':request.data['category']},instance=persona)
+        serializer=PersonaSerializer(data={
+            'user':user.id,
+            'profile':profile.id,
+            'name':request.data['name'],
+            'category':request.data['category'],
+            'name':request.data['name'],
+            'image':request.data['image']},instance=persona)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         return Response(serializer.data)
