@@ -167,22 +167,17 @@ def following_list(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
-def follow(request,user_id):
+def follow(request,id):
     user = request.user
-    followed_user = get_object_or_404(User, pk = user_id)
+    followed_user = get_object_or_404(User, pk = id)
     # followings = user.profile.followings.all()
-    subfollowings = followed_user.persona.all()
     is_follower = user.profile in followed_user.profile.followers.all()
     if request.method == 'POST':
         if is_follower:
             user.profile.followings.remove(followed_user.profile)
-            for subfollow in subfollowings:
-                user.profile.subfollowings.remove(subfollow)
             serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
         else:
             user.profile.followings.add(followed_user.profile)
-            for subfollow in subfollowings:
-                user.profile.subfollowings.add(subfollow)
             serializer = FollowingSerializer(user.profile, data=user.profile.followings.all())
         if serializer.is_valid():
             serializer.save()

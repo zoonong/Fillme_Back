@@ -9,7 +9,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     color_hex = serializers.SerializerMethodField(method_name='getColorhex')
     class Meta:
         model = Profile
-        fields = ['id','user','username','fullname', 'memo', 'color', 'color_hex', 'image']
+        fields = ['id','user','username','fullname', 'memo', 'color', 'color_hex', 'image','followings']
 
     def getColorhex(self, obj):
       profile = obj

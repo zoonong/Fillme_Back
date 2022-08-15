@@ -15,5 +15,5 @@ urlpatterns = [
    path('profile_persona/<int:user_id>/',user_profile_persona,name='user_profile_persona'),
    path('random_profile/',random_user_list, name='random_user_list'),
    path('following_list/',following_list,name='following_list'),
-   path('follow/<int:user_id>',follow,name='follow'),
+   path('follow/<int:id>/',follow,name='follow'),
 ]
