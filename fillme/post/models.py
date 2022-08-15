@@ -21,7 +21,8 @@ class Post(models.Model):
     image10 = models.ImageField(upload_to="post/", blank = True, null = True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-    # 좋아요 기능 추가해야 함
+    liked_user = models.ManyToManyField(User, blank=True, related_name='liked_user') # 좋아요를 한 유저
+    like_num = models.PositiveIntegerField(default = 0) # 좋아요 수
 
 class Comment(models.Model):
     id = models.AutoField(primary_key = True)
