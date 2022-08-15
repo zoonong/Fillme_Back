@@ -629,3 +629,88 @@
     {
         "comment": "삭제된 댓글 id 값(정수)"
     }
+
+
+### 유저 검색
+### 127.0.0.1:8000/search/ - POSt 메소드 사용
+#### 입력
+    {
+        "word":"검색 입력값"
+    }
+
+#### 결과
+    [
+        {
+            "id": "결과1 유저의 프로필 id값(정수)",
+            "userid": "결과1 유저의 id값(정수)",
+            "username": "결과1 유저의 계정 아이디(username)",
+            "fullname": "결과1 유저의 프로필 이름",
+            "image": "결과1 유저의 프로필 이미지"
+        },
+        {
+            "id": "결과2 유저의 프로필 id값(정수)",
+            "userid": "결과2 유저의 id값(정수)",
+            "username": "결과2 유저의 계정 아이디(username)",
+            "fullname": "결과2 유저의 프로필 이름",
+            "image": "결과2 유저의 프로필 이미지"
+        },
+        {
+            "id": "결과2 유저의 프로필 id값(정수)",
+            "userid": "결과2 유저의 id값(정수)",
+            "username": "결과2 유저의 계정 아이디(username)",
+            "fullname": "결과2 유저의 프로필 이름",
+            "image": "결과2 유저의 프로필 이미지"
+        }
+    ]
+
+## 나의 검색 기록
+### 나의 검색 기록 조회
+### 127.0.0.1:8000/search/history - GET 메소드 사용
+#### 결과
+    [
+        {
+            "id": "해당 히스토리 id 값(정수)",
+            "resultprofileid": "검색 결과로 나왔던 유저1 프로필 id(정수)",
+            "resultuserid": "검색 결과로 나왔던 유저1 id(정수)",
+            "resultusername": "검색 결과로 나왔던 유저1의 계정 아이디",
+            "resultfullname": "검색 결과로 나왔던 유저1의 프로필명",
+            "image": "검색 결과로 나왔던 유저1의 프로필 사진",
+            "user": "나의 유저 id 값(정수)"
+        },
+         {
+            "id": "해당 히스토리 id 값(정수)",
+            "resultprofileid": "검색 결과로 나왔던 유저2 프로필 id(정수)",
+            "resultuserid": "검색 결과로 나왔던 유저2 id(정수)",
+            "resultusername": "검색 결과로 나왔던 유저2의 계정 아이디",
+            "resultfullname": "검색 결과로 나왔던 유저2의 프로필명",
+            "image": "검색 결과로 나왔던 유저2의 프로필 사진",
+            "user": "나의 유저 id 값(정수)"
+        },
+         {
+            "id": "해당 히스토리 id 값(정수)",
+            "resultprofileid": "검색 결과로 나왔던 유저3 프로필 id(정수)",
+            "resultuserid": "검색 결과로 나왔던 유저3 id(정수)",
+            "resultusername": "검색 결과로 나왔던 유저3의 계정 아이디",
+            "resultfullname": "검색 결과로 나왔던 유저3의 프로필명",
+            "image": "검색 결과로 나왔던 유저3의 프로필 사진",
+            "user": "나의 유저 id 값(정수)"
+        },
+    ]
+
+### 나의 검색 기록 생성
+### 127.0.0.1:8000/search/history - POST 메소드 사용
+#### 입력
+    {
+        "resultprofileid": "검색 결과로 나왔던 유저1 프로필 id(정수)",
+        "resultuserid": "검색 결과로 나왔던 유저1 id(정수)",
+        "resultusername": "검색 결과로 나왔던 유저1의 계정 아이디",
+        "resultfullname": "검색 결과로 나왔던 유저1의 프로필명",
+        "image": "검색 결과로 나왔던 유저1의 프로필 사진",
+    }
+
+### 나의 검색 기록 삭제
+### 127.0.0.1:8000/search/history/<int:history_id> - DELETE 메소드 사용
+#### 결과
+    {
+        "history_id":"삭제된 history id 값(정수)"
+    }
