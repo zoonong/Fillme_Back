@@ -59,19 +59,7 @@ def post_detail_update_delete(request, post_pk):
             }
             return Response(data)
 
-# 3. 영상 - 특정 게시물 가져 오기
-@api_view(['GET'])
-@permission_classes([IsAuthenticatedOrReadOnly])
-def video_post_list(request):
-    user = request.user
-
-    if request.method == 'GET':
-        request.data['writer'] = user.id
-        posts = Post.objects.all()
-        serializer = VideoSerializer(posts, many = True)
-        return Response(serializer.data)
-
-# 4. 영상 - 특정 게시물 작성하기
+# 3. 영상 - 특정 게시물 작성하기
 @api_view(['POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def video_post_create(request):
@@ -85,12 +73,17 @@ def video_post_create(request):
             serializer.save()
             return Response(data = serializer.data)
 
-# 5. 영상 - 특정 게시물 수정 / 삭제(게시물 작성한 유저만 수정, 삭제 가능하게)
-@api_view(['PATCH', 'DELETE'])
+# 4. 영상 - 특정 게시물 가져 오기 / 수정 / 삭제(게시물 작성한 유저만 수정, 삭제 가능하게)
+@api_view(['GET', 'PATCH', 'DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def video_post_update_delete(request, post_pk):
     user = request.user
     post = get_object_or_404(Post, pk = post_pk)
+
+    if request.method == 'GET':
+        request.data['writer'] = user.id
+        serializer = VideoSerializer(post)
+        return Response(serializer.data)
 
     if request.method == 'PATCH':
         if user == post.writer:
