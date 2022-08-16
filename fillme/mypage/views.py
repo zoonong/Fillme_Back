@@ -65,7 +65,7 @@ def my_persona_list_create(request):
         personas = user.persona_set.all()
         serializer = PersonaSerializer(personas, many=True)
         return Response(serializer.data)
-
+        
 # 페르소나 조회/수정/삭제
 @api_view(['GET','PATCH', 'DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
@@ -77,6 +77,7 @@ def my_persona_rud(request, persona_id):
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
     elif request.method == "PATCH":
+        if user == persona.user:
             serializer=PersonaSerializer(data={
                 'user':user.id,
                 'profile':profile.id,
@@ -87,6 +88,7 @@ def my_persona_rud(request, persona_id):
                 serializer.save()
             return Response(serializer.data)
     elif request.method == "DELETE":
+        if user == persona.user:
             persona.delete()
             return Response({'persona_id':persona_id})
 
