@@ -5,12 +5,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Post, Comment
-from .serializers import CommentSerializer, PostSerializer, LikeSerializer, PostLikeSerializer
+from .serializers import CommentSerializer, AllPostSerializer, PostSerializer, VideoSerializer, LikeSerializer, PostLikeSerializer
 
 # Create your views here.
 
 # POST(게시물) 관련
-# 1. 모든 게시물 가져 오기 및 게시물 작성(로그인만 하면 유저 제한 없음)
+# 1. 모든 게시물 가져 오기 및 사진 게시물 작성(로그인만 하면 유저 제한 없음)
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def post_list_create(request):
@@ -19,7 +19,7 @@ def post_list_create(request):
     if request.method == 'GET':
         request.data['writer'] = user.id
         posts = Post.objects.all()
-        serializer = PostSerializer(posts, many = True)
+        serializer = AllPostSerializer(posts, many = True)
 
         return Response(data = serializer.data)
 
@@ -31,7 +31,7 @@ def post_list_create(request):
             serializer.save()
             return Response(data = serializer.data)
 
-# 2. 특정 게시물 가져 오기 / 수정 / 삭제(게시물 작성한 유저만 수정, 삭제 가능하게)
+# 2. 사진 - 특정 게시물 가져 오기 / 수정 / 삭제(게시물 작성한 유저만 수정, 삭제 가능하게)
 @api_view(['GET', 'PATCH', 'DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def post_detail_update_delete(request, post_pk):
@@ -47,6 +47,48 @@ def post_detail_update_delete(request, post_pk):
         if user == post.writer:
             request.data['writer'] = user.id
             serializer = PostSerializer(instance = post, data = request.data)
+            if serializer.is_valid(raise_exception = True):
+                serializer.save()
+            return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        if user == post.writer:
+            post.delete()
+            data = {
+                'post':post_pk
+            }
+            return Response(data)
+
+# 3. 영상 - 특정 게시물 작성하기
+@api_view(['POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def video_post_create(request):
+    user = request.user
+
+    if request.method == 'POST':
+        request.data['writer'] = user.id
+        serializer = VideoSerializer(data = request.data)
+
+        if serializer.is_valid(raise_exception = True):
+            serializer.save()
+            return Response(data = serializer.data)
+
+# 4. 영상 - 특정 게시물 가져 오기 / 수정 / 삭제(게시물 작성한 유저만 수정, 삭제 가능하게)
+@api_view(['GET', 'PATCH', 'DELETE'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def video_post_update_delete(request, post_pk):
+    user = request.user
+    post = get_object_or_404(Post, pk = post_pk)
+
+    if request.method == 'GET':
+        request.data['writer'] = user.id
+        serializer = VideoSerializer(post)
+        return Response(serializer.data)
+
+    if request.method == 'PATCH':
+        if user == post.writer:
+            request.data['writer'] = user.id
+            serializer = VideoSerializer(instance = post, data = request.data)
             if serializer.is_valid(raise_exception = True):
                 serializer.save()
             return Response(serializer.data)
@@ -111,6 +153,7 @@ def post_comment_detail_update_delete(request, post_pk, comment_pk):
         if user == comment.writer or user == post.writer:
             comment.delete()
             return Response({'comment':comment_pk})
+
 
 # 좋아요 관련
 # 1. 해당 게시물 좋아요 수 보기
