@@ -77,18 +77,18 @@ def my_persona_rud(request, persona_id):
         serializer = PersonaSerializer(persona)
         return Response(serializer.data)
     elif request.method == "PATCH":
-        serializer=PersonaSerializer(data={
-            'user':user.id,
-            'profile':profile.id,
-            'name':request.data['name'],
-            'category':request.data['category'],
-            'image':request.data['image']},instance=persona)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-        return Response(serializer.data)
+            serializer=PersonaSerializer(data={
+                'user':user.id,
+                'profile':profile.id,
+                'name':request.data['name'],
+                'category':request.data['category'],
+                'image':request.data['image']},instance=persona)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            return Response(serializer.data)
     elif request.method == "DELETE":
-        persona.delete()
-        return Response({'persona_id':persona_id})
+            persona.delete()
+            return Response({'persona_id':persona_id})
 
 # 다른 유저의 페르소나 목록 조회
 @api_view(['GET'])
