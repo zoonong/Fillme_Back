@@ -180,7 +180,7 @@ def follow(request,id):
     followed_user = get_object_or_404(User, pk = id)
     # followings = user.profile.followings.all()
     is_follower = user.profile in followed_user.profile.followers.all()
-    follower_subs = followed_user.persona_set.all()
+    #follower_subs = followed_user.persona_set.all()
     if request.method == 'POST':
         if is_follower:
             user.profile.followings.remove(followed_user.profile)

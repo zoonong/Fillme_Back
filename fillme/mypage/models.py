@@ -31,7 +31,7 @@ class Profile(models.Model):
     ## 프론트에서 가져올때 : profile.color 는 키값, profile.get_color_display() 는 내용
     image = models.ImageField(upload_to = "mypage/", blank=True, null=True)
     followings = models.ManyToManyField("self", related_name="followers", symmetrical=False)
-    subfollowings = models.ManyToManyField("Persona", related_name="subfollowers", symmetrical=False)
+    #subfollowings = models.ManyToManyField("Persona", related_name="subfollowers", symmetrical=False)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

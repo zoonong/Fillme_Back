@@ -37,4 +37,4 @@ class ProfilepersonaSerializer(serializers.ModelSerializer):
 class FollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['followings','subfollowings']
+        fields = ['followings']
