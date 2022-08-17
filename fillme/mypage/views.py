@@ -30,7 +30,7 @@ def profile_update(request):
         return Response(data=serializer.data)
     elif request.method == 'PATCH':
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile, data=request.data)
+        serializer = ProfileSerializer(data=request.data, instance=profile)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
         return Response(data=serializer.data)
@@ -179,8 +179,17 @@ def random_user_list(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticatedOrReadOnly])
-def following_list(request):
+def my_following_list(request):
     user = request.user
+    # followings = user.profile.followings.all()
+    if request.method == 'GET':
+        serializer = FollowingSerializer(user.profile)
+        return Response(data=serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def user_following_list(request, user_id):
+    user = User.objects.get(pk=user_id)
     # followings = user.profile.followings.all()
     if request.method == 'GET':
         serializer = FollowingSerializer(user.profile)
