@@ -40,7 +40,7 @@ class FollowingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['followings','followingnum','followernum']
+        fields = ['followings','followingnum','followernum','subfollowings']
 
     def getfollowingnum(self, obj):
       profile = obj
@@ -49,3 +49,9 @@ class FollowingSerializer(serializers.ModelSerializer):
     def getfollowernum(self, obj):
       profile = obj
       return profile.followers.count()
+
+class SubfollowingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = ['subfollowings']
