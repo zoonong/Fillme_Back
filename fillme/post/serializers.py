@@ -98,15 +98,15 @@ class PostSerializer(serializers.ModelSerializer):
                 'fullname'
         ]
 
-        def getusername(self, obj):
-            post = obj
-            user = post.writer
-            return user.username
+    def getusername(self, obj):
+        post = obj
+        user = post.writer
+        return user.username
 
-        def getfullname(self, obj):
-            post = obj
-            user = post.writer
-            return user.profile.fullname
+    def getfullname(self, obj):
+        post = obj
+        user = post.writer
+        return user.profile.fullname
 
 # 게시물 - 영상 업로드
 class VideoSerializer(serializers.ModelSerializer):
