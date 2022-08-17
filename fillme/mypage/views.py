@@ -195,7 +195,7 @@ def user_following_list(request, user_id):
         serializer = FollowingSerializer(user.profile)
         return Response(data=serializer.data)
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def follow(request,id):
     user = request.user
@@ -213,3 +213,11 @@ def follow(request,id):
         if serializer.is_valid():
             serializer.save()
         return Response(data=serializer.data)
+    elif request.method == 'GET':
+        if is_follower:
+            followState = "팔로잉"
+            text = "유저를 팔로우 중입니다."
+        else:
+            followState = "팔로우"
+            text = "유저를 언팔로우 중입니다."
+        return Response(data={"followState":followState, "text":text})
