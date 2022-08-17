@@ -28,17 +28,30 @@ def search_user(request):
 @permission_classes([IsAuthenticatedOrReadOnly])
 def history_list_create(request):
     user = request.user
+    myhistory = History.objects.filter(user=user)
     if request.method=="POST":
-        serializer = SearchhistorySerializer(data={
-            'user':user.id,
-            'resultprofileid':request.data['resultprofileid'],
-            'resultuserid':request.data['resultuserid'],
-            'resultusername':request.data['resultusername'],
-            'resultfullname':request.data['resultfullname'],
-            'image':request.data['image']})
-        if serializer.is_valid(raise_exception=True):
-            serializer.save() 
-        return Response(serializer.data)
+        profile_id = request.data['resultprofile']
+        profile = get_object_or_404(Profile, pk = profile_id)
+        if myhistory.count() > 0:
+            for i in range(myhistory.count()):
+                if myhistory[i].resultprofile == profile_id:
+                    return Response({"warning":"해당 유저에 대한 검색 기록이 존재합니다."})
+                else:
+                    serializer = SearchhistorySerializer(data={
+                        'user':user.id,
+                        'resultprofile': profile.id,
+                        'image':request.data['image']})
+                    if serializer.is_valid(raise_exception=True):
+                        serializer.save() 
+                    return Response(serializer.data)
+        else:
+            serializer = SearchhistorySerializer(data={
+                'user':user.id,
+                'resultprofile': profile.id,
+                'image':request.data['image']})
+            if serializer.is_valid(raise_exception=True):
+                serializer.save() 
+            return Response(serializer.data)            
     elif request.method == 'GET':
         myhistory = History.objects.filter(user=user)
         serializer = SearchhistorySerializer(myhistory, many=True)

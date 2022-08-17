@@ -922,42 +922,39 @@
     [
         {
             "id": "해당 히스토리 id 값(정수)",
-            "resultprofileid": "검색 결과로 나왔던 유저1 프로필 id(정수)",
-            "resultuserid": "검색 결과로 나왔던 유저1 id(정수)",
-            "resultusername": "검색 결과로 나왔던 유저1의 계정 아이디",
-            "resultfullname": "검색 결과로 나왔던 유저1의 프로필명",
+            "user": "나의 유저 id 값(정수)",
+            "userid": "검색 결과로 나왔던 유저1 id(정수)",
+            "username": "검색 결과로 나왔던 유저1의 계정 아이디",
+            "resultprofile": "검색 결과로 나왔던 유저1 프로필 id(정수)",
+            "fullname": "검색 결과로 나왔던 유저1의 프로필명",
             "image": "검색 결과로 나왔던 유저1의 프로필 사진",
-            "user": "나의 유저 id 값(정수)"
         },
-         {
+        {
             "id": "해당 히스토리 id 값(정수)",
-            "resultprofileid": "검색 결과로 나왔던 유저2 프로필 id(정수)",
-            "resultuserid": "검색 결과로 나왔던 유저2 id(정수)",
-            "resultusername": "검색 결과로 나왔던 유저2의 계정 아이디",
-            "resultfullname": "검색 결과로 나왔던 유저2의 프로필명",
+            "user": "나의 유저 id 값(정수)",
+            "userid": "검색 결과로 나왔던 유저2 id(정수)",
+            "username": "검색 결과로 나왔던 유저2의 계정 아이디",
+            "resultprofile": "검색 결과로 나왔던 유저2 프로필 id(정수)",
+            "fullname": "검색 결과로 나왔던 유저2의 프로필명",
             "image": "검색 결과로 나왔던 유저2의 프로필 사진",
-            "user": "나의 유저 id 값(정수)"
         },
-         {
+        {
             "id": "해당 히스토리 id 값(정수)",
-            "resultprofileid": "검색 결과로 나왔던 유저3 프로필 id(정수)",
-            "resultuserid": "검색 결과로 나왔던 유저3 id(정수)",
-            "resultusername": "검색 결과로 나왔던 유저3의 계정 아이디",
-            "resultfullname": "검색 결과로 나왔던 유저3의 프로필명",
+            "user": "나의 유저 id 값(정수)",
+            "userid": "검색 결과로 나왔던 유저3 id(정수)",
+            "username": "검색 결과로 나왔던 유저3의 계정 아이디",
+            "resultprofile": "검색 결과로 나왔던 유저3 프로필 id(정수)",
+            "fullname": "검색 결과로 나왔던 유저3의 프로필명",
             "image": "검색 결과로 나왔던 유저3의 프로필 사진",
-            "user": "나의 유저 id 값(정수)"
-        },
+        }
     ]
 
 ### 나의 검색 기록 생성
 ### 127.0.0.1:8000/search/history - POST 메소드 사용
 #### 입력
     {
-        "resultprofileid": "검색 결과로 나왔던 유저1 프로필 id(정수)",
-        "resultuserid": "검색 결과로 나왔던 유저1 id(정수)",
-        "resultusername": "검색 결과로 나왔던 유저1의 계정 아이디",
-        "resultfullname": "검색 결과로 나왔던 유저1의 프로필명",
-        "image": "검색 결과로 나왔던 유저1의 프로필 사진",
+        "resultprofile": "검색 결과로 나왔던 유저1 프로필 id(정수)",
+        "image": "검색 결과로 나왔던 유저1의 프로필 사진(문자열)",
     }
 
 ### 나의 검색 기록 삭제
