@@ -35,6 +35,17 @@ class ProfilepersonaSerializer(serializers.ModelSerializer):
       return profile.get_color_display()
 
 class FollowingSerializer(serializers.ModelSerializer):
+    followingnum = serializers.SerializerMethodField(method_name='getfollowingnum')
+    followernum = serializers.SerializerMethodField(method_name='getfollowernum')
+
     class Meta:
         model = Profile
-        fields = ['followings']
+        fields = ['followings','followingnum','followernum']
+
+    def getfollowingnum(self, obj):
+      profile = obj
+      return profile.followings.count()
+
+    def getfollowernum(self, obj):
+      profile = obj
+      return profile.followers.count()

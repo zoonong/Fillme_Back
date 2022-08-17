@@ -838,7 +838,9 @@
         "followings": [
             "내가 팔로우한 사용자1 user.profile.id값(정수)",
             "내가 팔로우한 사용자2 user.profile.id값(정수)"
-        ]
+        ],
+        "followingnum":"내가 팔료우한 유저 수(정수)",
+        "followernum":"나를 팔로잉하고 있는 팔로워수(정수)"
     }
 
 ### 다른 사용자가 팔로우한 사용자 목록
@@ -848,7 +850,9 @@
         "followings": [
             "유저가 팔로우한 사용자1 user.profile.id값(정수)",
             "유저가 팔로우한 사용자2 user.profile.id값(정수)"
-        ]
+        ],
+        "followingnum":"유저가 팔료우한 유저 수(정수)",
+        "followernum":"유저를 팔로잉하고 있는 팔로워수(정수)"
     }
 
 ### 다른 사용자 팔로우/언팔로우 하기
