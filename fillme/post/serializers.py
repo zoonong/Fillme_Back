@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from accounts.models import *
+from mypage.models import *
 
 # 댓글
 class CommentSerializer(serializers.ModelSerializer):

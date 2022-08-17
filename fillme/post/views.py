@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
+from accounts.models import *
+from mypage.models import *
 from .models import Post, Comment
 from .serializers import CommentSerializer, AllPostSerializer, PostSerializer, VideoSerializer, LikeSerializer, PostLikeSerializer
 
@@ -17,7 +19,7 @@ def post_list_create(request):
     user = request.user
 
     if request.method == 'GET':
-        request.data['writer'] = user.id
+        request.data['writer'] = user.id #작성자의 id값을 저장하는 코드
         posts = Post.objects.all()
         serializer = AllPostSerializer(posts, many = True)
 
@@ -100,6 +102,48 @@ def video_post_update_delete(request, post_pk):
                 'post':post_pk
             }
             return Response(data)
+
+# 0817 추가
+# 1. 내가 팔로우한 유저의 게시글만 조회가능한 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def following_post_list(request):
+    user = request.user # 로그인한 유저(= 나) 정보 불러 오기
+    followings = user.profile.followings.all() # 내가 팔로우한 유저들 불러 오기
+
+    if request.method == 'GET':
+        for following in followings:
+            posts = Post.objects.filter(writer = following.user)
+            serializer = AllPostSerializer(posts, many = True)
+        return Response(serializer.data)
+
+# 2. 내가 작성한 게시글 목록을 조회하는 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def my_post_list(request):
+    user = request.user # 로그인한 유저(= 나) 정보 불러 오기
+
+    if request.method == 'GET':
+        request.data['writer'] = user.id # 해당 게시물의 writer는 user.id의 값을 입력 이런 의미인 것 같은데?
+        posts = Post.objects.filter(writer = user)
+        serializer = AllPostSerializer(posts, many = True)
+        return Response(serializer.data)
+
+# 3. 나의 특정 페르소나가 작성한 게시글 목록을 조회하는 api
+
+# 4. 내가 아닌 특정 유저가 작성한 게시글만 조회하는 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def user_post_list(request, user_id):
+    user = User.objects.get(pk = user_id)
+
+    if request.method == 'GET':
+        request.data['writer'] = user.id
+        posts = Post.objects.filter(writer = user)
+        serializer = AllPostSerializer(posts, many = True)
+        return Response(serializer.data)
+
+# 5. 내가 아닌 특정 유저의 특정 페르소나가 작성한 게시글만 조회하는 api
 
 
 # COMMENT(댓글) 관련
