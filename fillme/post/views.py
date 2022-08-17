@@ -130,6 +130,18 @@ def my_post_list(request):
         return Response(serializer.data)
 
 # 3. 나의 특정 페르소나가 작성한 게시글 목록을 조회하는 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def my_persona_post_list(request, persona_id):
+    user = request.user
+    persona = get_object_or_404(Persona, pk = persona_id)
+    post = Post.objects.filter(persona=persona) 
+
+    if request.method == 'GET':
+        request.data['writer'] = user.id
+        # posts = Post.objects.filter(persona = persona)
+        serializer = AllPostSerializer(post, many = True)
+        return Response(serializer.data)
 
 # 4. 내가 아닌 특정 유저가 작성한 게시글만 조회하는 api
 @api_view(['GET'])
@@ -144,6 +156,30 @@ def user_post_list(request, user_id):
         return Response(serializer.data)
 
 # 5. 내가 아닌 특정 유저의 특정 페르소나가 작성한 게시글만 조회하는 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def user_persona_post_list(request, user_id, persona_id):
+    user = get_object_or_404(User, pk = user_id) # 유저 한 번 거르고 -> 특정 유저
+    persona = get_object_or_404(Persona, pk = persona_id)
+    post = Post.objects.filter(persona = persona) 
+
+    if request.method == 'GET':
+        request.data['writer'] = user.id
+        serializer = AllPostSerializer(post, many = True)
+        return Response(serializer.data)
+
+# 6. 내가 소식받기한 페르소나의 게시글만 조회하는 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def persona_follow_post_list(request, persona_id):
+    user = request.user # 로그인한 유저(= 나) 정보 불러 오기
+    subfollowings = user.profile.subfollowings.all() # 내가 팔로우한 유저들 불러 오기
+
+    if request.method == 'GET':
+        for following in subfollowings:
+            posts = get_object_or_404(Post.objects.filter(writer = following.user), pk = persona_id)
+            serializer = AllPostSerializer(posts, many = True)
+        return Response(serializer.data)
 
 
 # COMMENT(댓글) 관련
