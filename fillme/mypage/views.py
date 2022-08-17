@@ -139,15 +139,26 @@ def user_profile_persona(request, user_id):
 @permission_classes([IsAuthenticatedOrReadOnly])
 def persona_public(request, persona_id):
     user = request.user
+    profile = Profile.objects.get(user=user)
     persona = get_object_or_404(Persona, pk = persona_id)
     if request.method == 'PATCH':
         if persona.openpublic == True:
-            serializer = PersonaSerializer(data={"name":persona.name, "category":persona.category, "openpublic":"False"},instance=persona)
+            serializer = PersonaSerializer(data={
+                'user':user.id,
+                'profile':profile.id,
+                "name":persona.name,
+                "category":persona.category,
+                "openpublic":"False"},instance=persona)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
             return Response(data=serializer.data)
         else:
-            serializer = PersonaSerializer(data={"name":persona.name, "category":persona.category, "openpublic":"True"},instance=persona)
+            serializer = PersonaSerializer(data={
+                'user':user.id,
+                'profile':profile.id,
+                "name":persona.name,
+                "category":persona.category,
+                "openpublic":"True"},instance=persona)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
             return Response(data=serializer.data)
