@@ -828,3 +828,32 @@
         "created_at": "작성 일자",
         "updated_at": "수정 일자"
     }
+
+
+## 팔로우/팔로잉
+### 내가 팔로우한 사용자 목록
+### 127.0.0.1:8000/mypage/following_list/ - GET 메소드 사용
+#### 결과
+    {
+        "followings": [
+            "내가 팔로우한 사용자1 user.profile.id값(정수)",
+            "내가 팔로우한 사용자2 user.profile.id값(정수)"
+        ]
+    }
+
+### 다른 사용자가 팔로우한 사용자 목록
+### 127.0.0.1:8000/mypage/<int:user_id>/following_list/ - GET 메소드 사용
+#### 결과
+    {
+        "followings": [
+            "유저가 팔로우한 사용자1 user.profile.id값(정수)",
+            "유저가 팔로우한 사용자2 user.profile.id값(정수)"
+        ]
+    }
+
+### 다른 사용자 팔로우/언팔로우 하기
+### 127.0.0.1:8000/mypage/follow/<int:user_id>/ - POST 메소드 사용
+#### 입력 및 결과
+    입력은 아무것도 넣지 않고 보내고, 출력도 {}로만 나옴.
+    기존에 팔로우 했던 사용자 id를 넣고 POST 보내면 언팔로우,
+    팔로우 하지 않고 있던 사용자 id를 넣고 POST 보내면 팔로우
