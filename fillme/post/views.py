@@ -105,6 +105,17 @@ def video_post_update_delete(request, post_pk):
 
 # 0817 추가
 # 1. 내가 팔로우한 유저의 게시글만 조회가능한 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def following_post_list(request):
+    user = request.user # 로그인한 유저(= 나) 정보 불러 오기
+    followings = user.profile.followings.all() # 내가 팔로우한 유저들 불러 오기
+
+    if request.method == 'GET':
+        for following in followings:
+            posts = Post.objects.filter(writer = following.user)
+            serializer = AllPostSerializer(posts, many = True)
+        return Response(serializer.data)
 
 # 2. 내가 작성한 게시글 목록을 조회하는 api
 @api_view(['GET'])
@@ -115,12 +126,22 @@ def my_post_list(request):
     if request.method == 'GET':
         request.data['writer'] = user.id # 해당 게시물의 writer는 user.id의 값을 입력 이런 의미인 것 같은데?
         posts = Post.objects.filter(writer = user)
-        serializer = PostSerializer(posts, many = True)
+        serializer = AllPostSerializer(posts, many = True)
         return Response(serializer.data)
 
 # 3. 나의 특정 페르소나가 작성한 게시글 목록을 조회하는 api
 
 # 4. 내가 아닌 특정 유저가 작성한 게시글만 조회하는 api
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def user_post_list(request, user_id):
+    user = User.objects.get(pk = user_id)
+
+    if request.method == 'GET':
+        request.data['writer'] = user.id
+        posts = Post.objects.filter(writer = user)
+        serializer = AllPostSerializer(posts, many = True)
+        return Response(serializer.data)
 
 # 5. 내가 아닌 특정 유저의 특정 페르소나가 작성한 게시글만 조회하는 api
 
