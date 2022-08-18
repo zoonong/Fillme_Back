@@ -22,6 +22,7 @@ class AllPostSerializer(serializers.ModelSerializer):
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
     username = serializers.SerializerMethodField(method_name='getusername')
     fullname = serializers.SerializerMethodField(method_name='getfullname')
+    personaname = serializers.SerializerMethodField(method_name='getpersonaname')
 
     class Meta:
         model = Post
@@ -49,7 +50,8 @@ class AllPostSerializer(serializers.ModelSerializer):
                 'created_at',
                 'updated_at',
                 'username',
-                'fullname'
+                'fullname',
+                'personaname'
         ]
 
     def getusername(self, obj):
@@ -62,6 +64,11 @@ class AllPostSerializer(serializers.ModelSerializer):
         user = post.writer
         return user.profile.fullname
     
+    def getpersonaname(self, obj):
+        post = obj
+        persona = post.persona
+        return persona.name
+    
 
 # 게시물 - 사진 업로드
 class PostSerializer(serializers.ModelSerializer):
@@ -69,6 +76,7 @@ class PostSerializer(serializers.ModelSerializer):
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
     username = serializers.SerializerMethodField(method_name='getusername')
     fullname = serializers.SerializerMethodField(method_name='getfullname')
+    personaname = serializers.SerializerMethodField(method_name='getpersonaname')
 
     class Meta:
         model = Post
@@ -95,7 +103,8 @@ class PostSerializer(serializers.ModelSerializer):
                 'created_at',
                 'updated_at',
                 'username',
-                'fullname'
+                'fullname',
+                'personaname'
         ]
 
     def getusername(self, obj):
@@ -108,12 +117,18 @@ class PostSerializer(serializers.ModelSerializer):
         user = post.writer
         return user.profile.fullname
 
+    def getpersonaname(self, obj):
+        post = obj
+        persona = post.persona
+        return persona.name
+
 # 게시물 - 영상 업로드
 class VideoSerializer(serializers.ModelSerializer):
     comment_set = CommentSerializer(many=True, read_only=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
     username = serializers.SerializerMethodField(method_name='getusername')
     fullname = serializers.SerializerMethodField(method_name='getfullname')
+    personaname = serializers.SerializerMethodField(method_name='getpersonaname')
 
     class Meta:
         model = Post
@@ -130,7 +145,8 @@ class VideoSerializer(serializers.ModelSerializer):
                 'created_at',
                 'updated_at',
                 'username',
-                'fullname'
+                'fullname',
+                'personaname'
         ]
 
     def getusername(self, obj):
@@ -142,6 +158,11 @@ class VideoSerializer(serializers.ModelSerializer):
         post = obj
         user = post.writer
         return user.profile.fullname
+
+    def getpersonaname(self, obj):
+        post = obj
+        persona = post.persona
+        return persona.name
 
 # 좋아요
 class LikeSerializer(serializers.ModelSerializer):

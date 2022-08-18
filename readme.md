@@ -509,7 +509,7 @@
 
 ### 1. 모든 게시물 가져 오기 및 사진 게시물 작성
 ### 1-1. 모든 게시물 가져 오기
-### 127.0.0.1:8000/post - GET 메소드 사용
+### 127.0.0.1:8000/post/ - GET 메소드 사용
 #### 결과
 #### 사진을 업로드한 경우
     [
@@ -535,6 +535,9 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
 #### 영상을 업로드한 경우
@@ -561,11 +564,14 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
     
 ### 1-2. 사진 게시물 작성
-### 127.0.0.1:8000/post - POST 메소드 사용
+### 127.0.0.1:8000/post/ - POST 메소드 사용
     {
         "title": "제목",
         "content": "내용",
@@ -575,7 +581,7 @@
    
 ### 2. 사진을 첨부한 게시물 중 특정 게시물 가져 오기 / 수정 / 삭제
 ### 2-1. 사진을 첨부한 게시물 중 특정 게시물 가져 오기
-### 127.0.0.1:8000/post/<int:post_pk> - GET 메소드 사용
+### 127.0.0.1:8000/post/<int:post_pk>/ - GET 메소드 사용
 #### 결과
     {
         "id": "해당 게시물 id 값(정수)",
@@ -598,10 +604,13 @@
         "comment_count": "해당 게시물 댓글 수(정수)",
         "created_at": "작성 일자",
         "updated_at": "수정 일자"
+        "username" : "로그인할 때 사용되는 사용자 아이디",
+        "fullname": "프로필 성명",
+        "personaname": "해당 게시물 작성자의 페르소나 이름"
     }
     
 ### 2-2. 사진을 첨부한 게시물 중 특정 게시물 수정하기
-### 127.0.0.1:8000/post/<int:post_pk> - PATCH 메소드 사용
+### 127.0.0.1:8000/post/<int:post_pk>/ - PATCH 메소드 사용
     {
         "title": "제목",
         "content": "내용",
@@ -610,14 +619,14 @@
     }
     
 ### 2-3. 사진을 첨부한 게시물 중 특정 게시물 삭제하기
-### 127.0.0.1:8000/post/<int:post_pk> - DELETE 메소드 사용
+### 127.0.0.1:8000/post/<int:post_pk>/ - DELETE 메소드 사용
 #### 결과
     {
         "post": "삭제된 게시물 id 값(정수)"
     }
 
 ### 3. 영상을 첨부한 게시물 중 특정 게시물 작성하기
-### 127.0.0.1:8000/post/video_post_create - POST 메소드 사용
+### 127.0.0.1:8000/post/video_post_create/ - POST 메소드 사용
     {
         "title": "제목",
         "content": "내용",
@@ -627,7 +636,7 @@
 
 ### 4. 영상을 첨부한 게시물 중 특정 게시물 가져 오기 / 수정 / 삭제
 ### 4-1. 영상을 첨부한 게시물 중 특정 게시물 가져 오기
-### 127.0.0.1:8000/post/<int:post_pk>/video_post_update_delete - GET 메소드 사용
+### 127.0.0.1:8000/post/<int:post_pk>/video_post_update_delete/ - GET 메소드 사용
 #### 결과
     {
         "id": "해당 게시물 id 값(정수)",
@@ -641,10 +650,13 @@
         "comment_count": "해당 게시물 댓글 수(정수)",
         "created_at": "작성 일자",
         "updated_at": "수정 일자"
+        "username" : "로그인할 때 사용되는 사용자 아이디",
+        "fullname": "프로필 성명",
+        "personaname": "해당 게시물 작성자의 페르소나 이름"
     },
     
 ### 4-2. 영상을 첨부한 게시물 중 특정 게시물 수정하기
-### 127.0.0.1:8000/post/<int:post_pk>/video_post_update_delete - PATCH 메소드 사용
+### 127.0.0.1:8000/post/<int:post_pk>/video_post_update_delete/ - PATCH 메소드 사용
     {
         "title": "제목",
         "content": "내용",
@@ -653,15 +665,16 @@
     }
 
 ### 4-3. 영상을 첨부한 게시물 중 특정 게시물 삭제하기
-### 127.0.0.1:8000/post/<int:post_pk>/video_post_update_delete - DELETE 메소드 사용
+### 127.0.0.1:8000/post/<int:post_pk>/video_post_update_delete/ - DELETE 메소드 사용
 #### 결과
     {
         "post": "삭제된 게시물 id 값(정수)"
     }
 
 ### 0817 추가
+
 ### 1. 내가 팔로우한 유저의 게시글만 조회가능한 api
-### 127.0.0.1:8000/post/myfollow - GET 메소드 사용
+### 127.0.0.1:8000/post/myfollow/ - GET 메소드 사용
 #### 결과
 #### 사진을 업로드한 경우
     [
@@ -687,6 +700,9 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
 #### 영상을 업로드한 경우
@@ -713,13 +729,16 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
 #### 게시물이 없다면
     []
     
 ### 2. 내가 작성한 게시글 목록을 조회하는 api
-### 127.0.0.1:8000/post/mypost - GET 메소드 사용
+### 127.0.0.1:8000/post/mypost/ - GET 메소드 사용
 #### 결과
 #### 사진을 업로드한 경우
     [
@@ -745,6 +764,9 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
 #### 영상을 업로드한 경우
@@ -771,15 +793,16 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
 #### 게시물이 없다면
     []
     
 ### 3. 나의 특정 페르소나가 작성한 게시글 목록을 조회하는 api
-
-### 4. 내가 아닌 특정 유저가 작성한 게시글만 조회하는 api
-### 127.0.0.1:8000/post/user_post/<int:user_id> - GET 메소드 사용
+### 127.0.0.1:8000/post/mypost/<int:persona_id>/ - GET 메소드 사용
 #### 결과
 #### 사진을 업로드한 경우
     [
@@ -805,6 +828,9 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
 #### 영상을 업로드한 경우
@@ -831,12 +857,205 @@
             "comment_count": "해당 게시물 댓글 수(정수)",
             "created_at": "작성 일자",
             "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
+        },
+    ]
+#### 게시물이 없다면
+    []
+
+### 4. 내가 아닌 특정 유저가 작성한 게시글만 조회하는 api
+### 127.0.0.1:8000/post/user_post/<int:user_id>/ - GET 메소드 사용
+#### 결과
+#### 사진을 업로드한 경우
+    [
+        {
+            "id": "해당 게시물 id 값(정수)",
+            "writer": "해당 게시물 작성자 id 값(정수)",
+            "persona": "해당 게시물 작성자의 페르소나 id 값(정수)",
+            "title": "게시물 제목",
+            "content": "게시물 내용",
+            "image1": "이미지1(필수값)",
+            "image2": "이미지2",
+            "image3": "이미지3",
+            "image4": "이미지4",
+            "image5": "이미지5",
+            "image6": "이미지6",
+            "image7": "이미지7",
+            "image8": "이미지8",
+            "image9": "이미지9",
+            "image10": "이미지10",
+            "video": null,
+            "like_num": "해당 게시물 좋아요 수(정수)",
+            "comment_set": [],
+            "comment_count": "해당 게시물 댓글 수(정수)",
+            "created_at": "작성 일자",
+            "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
+        },
+    ]
+#### 영상을 업로드한 경우
+    [
+        {
+            "id": "해당 게시물 id 값(정수)",
+            "writer": "해당 게시물 작성자 id 값(정수)",
+            "persona": "해당 게시물 작성자의 페르소나 id 값(정수)",
+            "title": "게시물 제목",
+            "content": "게시물 내용",
+            "image1": null,
+            "image2": null,
+            "image3": null,
+            "image4": null,
+            "image5": null,
+            "image6": null,
+            "image7": null,
+            "image8": null,
+            "image9": null,
+            "image10": null,
+            "video": "영상",
+            "like_num": "해당 게시물 좋아요 수(정수)",
+            "comment_set": [],
+            "comment_count": "해당 게시물 댓글 수(정수)",
+            "created_at": "작성 일자",
+            "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
         },
     ]
 #### 게시물이 없다면
     []
     
 ### 5. 내가 아닌 특정 유저의 특정 페르소나가 작성한 게시글만 조회하는 api
+### 127.0.0.1:8000/post/user_post/<int:user_id>/<int:persona_id>/ - GET 메소드 사용
+#### 결과
+#### 사진을 업로드한 경우
+    [
+        {
+            "id": "해당 게시물 id 값(정수)",
+            "writer": "해당 게시물 작성자 id 값(정수)",
+            "persona": "해당 게시물 작성자의 페르소나 id 값(정수)",
+            "title": "게시물 제목",
+            "content": "게시물 내용",
+            "image1": "이미지1(필수값)",
+            "image2": "이미지2",
+            "image3": "이미지3",
+            "image4": "이미지4",
+            "image5": "이미지5",
+            "image6": "이미지6",
+            "image7": "이미지7",
+            "image8": "이미지8",
+            "image9": "이미지9",
+            "image10": "이미지10",
+            "video": null,
+            "like_num": "해당 게시물 좋아요 수(정수)",
+            "comment_set": [],
+            "comment_count": "해당 게시물 댓글 수(정수)",
+            "created_at": "작성 일자",
+            "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
+        },
+    ]
+#### 영상을 업로드한 경우
+    [
+        {
+            "id": "해당 게시물 id 값(정수)",
+            "writer": "해당 게시물 작성자 id 값(정수)",
+            "persona": "해당 게시물 작성자의 페르소나 id 값(정수)",
+            "title": "게시물 제목",
+            "content": "게시물 내용",
+            "image1": null,
+            "image2": null,
+            "image3": null,
+            "image4": null,
+            "image5": null,
+            "image6": null,
+            "image7": null,
+            "image8": null,
+            "image9": null,
+            "image10": null,
+            "video": "영상",
+            "like_num": "해당 게시물 좋아요 수(정수)",
+            "comment_set": [],
+            "comment_count": "해당 게시물 댓글 수(정수)",
+            "created_at": "작성 일자",
+            "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
+        },
+    ]
+#### 게시물이 없다면
+    []
+   
+### 6. 내가 소식받기한 페르소나의 게시글만 조회하는 api
+### 127.0.0.1:8000/post/follow_persona/ - GET 메소드 사용
+#### 결과
+#### 사진을 업로드한 경우
+    [
+        {
+            "id": "해당 게시물 id 값(정수)",
+            "writer": "해당 게시물 작성자 id 값(정수)",
+            "persona": "해당 게시물 작성자의 페르소나 id 값(정수)",
+            "title": "게시물 제목",
+            "content": "게시물 내용",
+            "image1": "이미지1(필수값)",
+            "image2": "이미지2",
+            "image3": "이미지3",
+            "image4": "이미지4",
+            "image5": "이미지5",
+            "image6": "이미지6",
+            "image7": "이미지7",
+            "image8": "이미지8",
+            "image9": "이미지9",
+            "image10": "이미지10",
+            "video": null,
+            "like_num": "해당 게시물 좋아요 수(정수)",
+            "comment_set": [],
+            "comment_count": "해당 게시물 댓글 수(정수)",
+            "created_at": "작성 일자",
+            "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
+        },
+    ]
+#### 영상을 업로드한 경우
+    [
+        {
+            "id": "해당 게시물 id 값(정수)",
+            "writer": "해당 게시물 작성자 id 값(정수)",
+            "persona": "해당 게시물 작성자의 페르소나 id 값(정수)",
+            "title": "게시물 제목",
+            "content": "게시물 내용",
+            "image1": null,
+            "image2": null,
+            "image3": null,
+            "image4": null,
+            "image5": null,
+            "image6": null,
+            "image7": null,
+            "image8": null,
+            "image9": null,
+            "image10": null,
+            "video": "영상",
+            "like_num": "해당 게시물 좋아요 수(정수)",
+            "comment_set": [],
+            "comment_count": "해당 게시물 댓글 수(정수)",
+            "created_at": "작성 일자",
+            "updated_at": "수정 일자"
+            "username" : "로그인할 때 사용되는 사용자 아이디",
+            "fullname": "프로필 성명",
+            "personaname": "해당 게시물 작성자의 페르소나 이름"
+        },
+    ]
+#### 게시물이 없다면
+    []
 
 
 ### 댓글
@@ -850,6 +1069,7 @@
             "id": "해당 댓글 id 값(정수)",
             "post": "해당 게시물 id 값(정수)",
             "writer": "해당 유저의 id 값(정수)",
+            "username" : "로그인할 때 사용되는 사용자 아이디",
             "content": "댓글 내용",
             "created_at": "생성 일자",
             "updated_at": "수정 일자"
@@ -870,6 +1090,7 @@
         "id": "해당 댓글 id 값(정수)",
         "post": "해당 댓글의 게시물 id 값(정수)",
         "writer": "해당 유저의 id 값(정수)",
+        "username" : "로그인할 때 사용되는 사용자 아이디",
         "content": "댓글 내용",
         "created_at": "생성 일자",
         "updated_at": "수정 일자"
@@ -887,7 +1108,7 @@
     {
         "comment": "삭제된 댓글 id 값(정수)"
     }
-
+    
 
 ### 유저 검색
 ### 127.0.0.1:8000/search/ - POST 메소드 사용
@@ -970,6 +1191,7 @@
         "history_id":"삭제된 history id 값(정수)"
     }
     
+    
 ### 좋아요
 
 ### 1. 해당 게시물 좋아요 수 보기
@@ -1010,7 +1232,7 @@
         "created_at": "작성 일자",
         "updated_at": "수정 일자"
     }
-
+    
 
 ## 팔로우/팔로잉
 ### 내가 팔로우한 사용자 목록
