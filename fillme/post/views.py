@@ -52,11 +52,16 @@ def post_detail_update_delete(request, post_pk):
 
     elif request.method == 'PATCH':
         if user == post.writer:
-            request.data['writer'] = user.id
-            serializer = PostSerializer(instance = post, data = request.data)
-            if serializer.is_valid(raise_exception = True):
-                serializer.save()
-            return Response(serializer.data)
+            if request.data['persona'] in user.persona_set.all():
+                request.data['writer'] = user.id
+                serializer = PostSerializer(instance = post, data = request.data)
+                if serializer.is_valid(raise_exception = True):
+                    serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response({"warning":"본인의 페르소나가 아닙니다."})
+        else:
+            return Response({"warning":"본인의 게시글이 아닙니다."})
 
     elif request.method == 'DELETE':
         if user == post.writer:
@@ -97,11 +102,16 @@ def video_post_update_delete(request, post_pk):
 
     if request.method == 'PATCH':
         if user == post.writer:
-            request.data['writer'] = user.id
-            serializer = VideoSerializer(instance = post, data = request.data)
-            if serializer.is_valid(raise_exception = True):
-                serializer.save()
-            return Response(serializer.data)
+            if request.data['persona'] in user.persona_set.all():
+                request.data['writer'] = user.id
+                serializer = VideoSerializer(instance = post, data = request.data)
+                if serializer.is_valid(raise_exception = True):
+                    serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response({"warning":"본인의 페르소나가 아닙니다."})
+        else:
+            return Response({"warning":"본인의 게시글이 아닙니다."})
 
     elif request.method == 'DELETE':
         if user == post.writer:
