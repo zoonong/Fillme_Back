@@ -179,15 +179,22 @@ def user_persona_post_list(request, user_id, persona_id):
 def subfollowing_post_list(request):
     user = request.user # 로그인한 유저(= 나) 정보 불러 오기
     subfollowings = user.profile.subfollowings.all() # 내가 팔로우한 유저들 불러 오기
+    # persona = get_object_or_404(Persona, pk = persona_id)    
     postList = []
 
     if request.method == 'GET':
         for subfollowing in subfollowings:
-            posts = Post.objects.filter(persona = subfollowing)
-            followingPost = AllPostSerializer(posts, many = True)
-            postData = list(followingPost.data)
-            for data in postData:
-                postList.append(data)
+                posts = Post.objects.filter(persona = subfollowing)
+                followingPost = AllPostSerializer(posts, many = True)
+                postData = list(followingPost.data)
+                if subfollowing.openpublic == True:
+                    for data in postData:
+                        postList.append(data)
+        myposts = Post.objects.filter(writer = user)
+        myPost = AllPostSerializer(myposts, many=True)
+        mypostData = list(myPost.data)
+        for data in mypostData:
+            postList.append(data)
         serializer = sorted(postList, key = lambda k: k.get('createDate', 0), reverse = True)
         return Response(serializer)
 
