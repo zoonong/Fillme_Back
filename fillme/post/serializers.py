@@ -23,7 +23,7 @@ class AllPostSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(method_name='getusername')
     fullname = serializers.SerializerMethodField(method_name='getfullname')
     personaname = serializers.SerializerMethodField(method_name='getpersonaname')
-    personaimage = serializers.ReadOnlyField(source = 'persona.image')
+    personaimage = serializers.ImageField(source = 'persona.image')
 
     class Meta:
         model = Post
