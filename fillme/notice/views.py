@@ -15,7 +15,7 @@ def my_notice(request):
     if request.method == 'GET':
         notice = Notice.objects.filter(user=user)
         if notice.exists():
-            serializer = NoticeSerializer(notice)
+            serializer = NoticeSerializer(notice, many=True)
             return Response(data=serializer.data)
         else:
             return Response(data={})
