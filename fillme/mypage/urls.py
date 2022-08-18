@@ -18,4 +18,5 @@ urlpatterns = [
    path('<int:user_id>/following_list/',user_following_list,name='user_following_list'),
    path('follow/<int:user_id>/',follow,name='follow'),
    path('persona_follow/<int:persona_id>/',persona_follow,name='persona_follow'),
+   path('new_feelings/',new_feelings,name='new_feelings'),
 ]

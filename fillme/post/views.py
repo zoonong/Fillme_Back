@@ -119,7 +119,7 @@ def following_post_list(request):
             postData = list(followingPost.data)
             for data in postData:
                 postList.append(data)
-        serializer = sorted(postList, key = lambda k: k.get('createDate', 0), reverse = True)
+        serializer = sorted(postList, key = lambda k: k.get('created_at', 0), reverse = True)
         return Response(serializer)
 
 # 2. 내가 작성한 게시글 목록을 조회하는 api
@@ -195,7 +195,7 @@ def subfollowing_post_list(request):
         mypostData = list(myPost.data)
         for data in mypostData:
             postList.append(data)
-        serializer = sorted(postList, key = lambda k: k.get('createDate', 0), reverse = True)
+        serializer = sorted(postList, key = lambda k: k.get('created_at', 0), reverse = True)
         return Response(serializer)
 
 

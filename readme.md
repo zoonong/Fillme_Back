@@ -1365,3 +1365,31 @@
         "text":"님의 게시글에 댓글을 남겼습니다.",
         "content":"댓글 내용"
     }
+
+## New Feelings - 내가 팔로우 한 이후 팔로잉 유저가 새로 생성한 페르소나 목록 불러오기
+### 127.0.0.1:8000/mypage/new_feelings/ - GET 메소드 사용
+#### 결과
+    [
+        {
+            "id": "persona id 값",
+            "user": "user id 값",
+            "username" : "로그인할때 사용되는 사용자 아이디",
+            "profile": "profile id 값",
+            "name": "persona 1 이름",
+            "category": "persona 1 카테고리",
+            "image": "persona 1 이미지",
+            "openpublic": true,
+            "color_hex" : "색상 hex값"
+        },
+        {
+            "id": "persona id 값",
+            "user": "user id 값",
+            "username" : "로그인할때 사용되는 사용자 아이디",
+            "profile": "profile id 값",
+            "name": "persona 1 이름",
+            "category": "persona 1 카테고리",
+            "image": "persona 1 이미지",
+            "openpublic": true,
+            "color_hex" : "색상 hex값"
+        }
+    ]
