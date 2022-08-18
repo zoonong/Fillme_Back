@@ -21,7 +21,7 @@ class PersonaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Persona
-        fields = ['id','user','username','profile','name','category','image','openpublic', 'color_hex']
+        fields = ['id','user','username','profile','name','category','image','openpublic', 'color_hex', 'created_at']
 
     def getColorhex(self, obj):
       persona = obj
