@@ -12,10 +12,11 @@ from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 @api_view(['POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def search_user(request):
+    user = request.user
     if request.method=="POST":
         word = request.data['word']
-        resultuser = User.objects.filter(username__icontains=word)
-        resultprofile = Profile.objects.filter(fullname__icontains=word)
+        resultuser = User.objects.filter(username__icontains=word).exclude(pk=user.id)
+        resultprofile = Profile.objects.filter(fullname__icontains=word).exclude(user=user)
         count = resultuser.count()
         for i in range(count):
             usertoprofile = Profile.objects.filter(user=resultuser[i])

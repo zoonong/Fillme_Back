@@ -168,14 +168,23 @@ def persona_public(request, persona_id):
 @api_view(['GET'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def random_user_list(request):
+    user = request.user
     if request.method == 'GET':
         count = Profile.objects.all().count()
         if count < 6:
-            profiles = Profile.objects.all().order_by('?')
+            profiles = Profile.objects.all().order_by('?').exclude(user=user)
+            followings = user.profile.followings.all()
+            num = followings.count()
+            for i in range(num):
+                profiles = profiles.exclude(user=followings[i].user)
             serializer = ProfilepersonaSerializer(profiles, many=True)
         else:
-            profiles = Profile.objects.all().order_by('?')[:5]
-            serializer = ProfilepersonaSerializer(profiles, many=True)
+            profiles = Profile.objects.all().order_by('?').exclude(user=user)
+            followings = user.profile.followings.all()
+            num = followings.count()
+            for i in range(num):
+                profiles = profiles.exclude(user=followings[i].user)
+            serializer = ProfilepersonaSerializer(profiles[:5], many=True)
         return Response(data=serializer.data)
 
 # 나의 팔로잉 목록 조회
