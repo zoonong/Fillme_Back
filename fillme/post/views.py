@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-
+from notice.serializers import *
 from accounts.models import *
 from mypage.models import *
 from .models import Post, Comment
@@ -201,7 +201,15 @@ def post_comment_list(request, post_id):
         request.data['writer'] = user.id
         request.data['post'] = post.id
         serializer = CommentSerializer(data = request.data)
-
+        notice = NoticeSerializer(data={
+                "user":post.writer.id,
+                "userfrom":user.username,
+                "userto":post.persona.name,
+                "text":"님의 게시글에 댓글을 남겼습니다.",
+                "content":request.data["content"]
+            })
+        if notice.is_valid():
+            notice.save()
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(data=serializer.data)
@@ -274,7 +282,15 @@ def send_like(request, post_pk):
                 num = 0
             post_like.save()
             serializer = LikeSerializer(instance=post_like, data ={"persona":post_like.persona.id, "title":post_like.title, "content":post_like.content, 'like_num':num})
-
+            notice = NoticeSerializer(data={
+                "user":post_like.writer.id,
+                "userfrom":request.user.username,
+                "userto":post_like.persona.name,
+                "text":"님의 게시물을 좋아합니다.",
+                "content":"null"
+            })
+            if notice.is_valid():
+                notice.save()
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
             return Response(data = serializer.data)
