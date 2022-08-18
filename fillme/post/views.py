@@ -1,3 +1,5 @@
+from tkinter.messagebox import RETRY
+from urllib import response
 from django.shortcuts import render, get_object_or_404
 
 from rest_framework.response import Response
@@ -26,12 +28,15 @@ def post_list_create(request):
         return Response(data = serializer.data)
 
     if request.method == 'POST':
-        request.data['writer'] = user.id
-        serializer = PostSerializer(data = request.data)
+        if request.data['persona'] in user.persona_set.all():
+            request.data['writer'] = user.id
+            serializer = PostSerializer(data = request.data)
 
-        if serializer.is_valid(raise_exception = True):
-            serializer.save()
-            return Response(data = serializer.data)
+            if serializer.is_valid(raise_exception = True):
+                serializer.save()
+                return Response(data = serializer.data)
+        else:
+            return Response({"warning":"본인의 페르소나가 아닙니다."})
 
 # 2. 사진 - 특정 게시물 가져 오기 / 수정 / 삭제(게시물 작성한 유저만 수정, 삭제 가능하게)
 @api_view(['GET', 'PATCH', 'DELETE'])
@@ -68,12 +73,15 @@ def video_post_create(request):
     user = request.user
 
     if request.method == 'POST':
-        request.data['writer'] = user.id
-        serializer = VideoSerializer(data = request.data)
+        if request.data['persona'] in user.persona_set.all():
+            request.data['writer'] = user.id
+            serializer = VideoSerializer(data = request.data)
 
-        if serializer.is_valid(raise_exception = True):
-            serializer.save()
-            return Response(data = serializer.data)
+            if serializer.is_valid(raise_exception = True):
+                serializer.save()
+                return Response(data = serializer.data)
+        else:
+            return Response({"warning":"본인의 페르소나가 아닙니다."})
 
 # 4. 영상 - 특정 게시물 가져 오기 / 수정 / 삭제(게시물 작성한 유저만 수정, 삭제 가능하게)
 @api_view(['GET', 'PATCH', 'DELETE'])
