@@ -23,6 +23,7 @@ class AllPostSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(method_name='getusername')
     fullname = serializers.SerializerMethodField(method_name='getfullname')
     personaname = serializers.SerializerMethodField(method_name='getpersonaname')
+    personaimage = serializers.SerializerMethodField(method_name='getpersonaimage')
 
     class Meta:
         model = Post
@@ -51,7 +52,8 @@ class AllPostSerializer(serializers.ModelSerializer):
                 'updated_at',
                 'username',
                 'fullname',
-                'personaname'
+                'personaname',
+                'personaimage'
         ]
 
     def getusername(self, obj):
@@ -68,6 +70,11 @@ class AllPostSerializer(serializers.ModelSerializer):
         post = obj
         persona = post.persona
         return persona.name
+
+    def getpersonaimage(self, obj):
+        post = obj
+        persona = post.persona
+        return persona.image
     
 
 # 게시물 - 사진 업로드
