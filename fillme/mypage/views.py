@@ -297,7 +297,7 @@ def new_feelings(request):
                 if persona.created_at > notice[0].created_at:
                     new = PersonaSerializer(persona)
                     feelingList.append(new.data)
-        serializer = sorted(feelingList, key = lambda k: k.get('created_at', 0), reverse = True)
+        serializer = sorted(feelingList, key = lambda k: k['created_at'], reverse = True)
         return Response(serializer)
         
     

@@ -28,7 +28,7 @@ def post_list_create(request):
         return Response(data = serializer.data)
 
     if request.method == 'POST':
-        if request.data['persona'] in user.persona_set.all():
+        if Persona.objects.get(pk=request.data['persona']).user == user:
             request.data['writer'] = user.id
             serializer = PostSerializer(data = request.data)
 
@@ -52,7 +52,7 @@ def post_detail_update_delete(request, post_pk):
 
     elif request.method == 'PATCH':
         if user == post.writer:
-            if request.data['persona'] in user.persona_set.all():
+            if Persona.objects.get(pk=request.data['persona']).user == user:
                 request.data['writer'] = user.id
                 serializer = PostSerializer(instance = post, data = request.data)
                 if serializer.is_valid(raise_exception = True):
@@ -78,7 +78,7 @@ def video_post_create(request):
     user = request.user
 
     if request.method == 'POST':
-        if request.data['persona'] in user.persona_set.all():
+        if Persona.objects.get(pk=request.data['persona']).user == user:
             request.data['writer'] = user.id
             serializer = VideoSerializer(data = request.data)
 
@@ -102,7 +102,7 @@ def video_post_update_delete(request, post_pk):
 
     if request.method == 'PATCH':
         if user == post.writer:
-            if request.data['persona'] in user.persona_set.all():
+            if Persona.objects.get(pk=request.data['persona']).user == user:
                 request.data['writer'] = user.id
                 serializer = VideoSerializer(instance = post, data = request.data)
                 if serializer.is_valid(raise_exception = True):
@@ -137,7 +137,7 @@ def following_post_list(request):
             postData = list(followingPost.data)
             for data in postData:
                 postList.append(data)
-        serializer = sorted(postList, key = lambda k: k.get('created_at', 0), reverse = True)
+        serializer = sorted(postList, key = lambda k: k['created_at'], reverse = True)
         return Response(serializer)
 
 # 2. 내가 작성한 게시글 목록을 조회하는 api
@@ -213,7 +213,7 @@ def subfollowing_post_list(request):
         mypostData = list(myPost.data)
         for data in mypostData:
             postList.append(data)
-        serializer = sorted(postList, key = lambda k: k.get('created_at', 0), reverse = True)
+        serializer = sorted(postList, key = lambda k: k['created_at'], reverse = True)
         return Response(serializer)
 
 
