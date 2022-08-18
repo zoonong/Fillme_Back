@@ -285,7 +285,7 @@ def send_like(request, post_pk):
             notice = NoticeSerializer(data={
                 "user":post_like.writer.id,
                 "userfrom":request.user.username,
-                "userto":post_like.writer.username,
+                "userto":post_like.persona.name,
                 "text":"님의 게시물을 좋아합니다.",
                 "content":"null"
             })
