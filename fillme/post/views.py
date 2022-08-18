@@ -233,9 +233,11 @@ def post_comment_list(request, post_id):
         return Response(serializer.data)
 
     if request.method == 'POST':
-        request.data['writer'] = user.id
-        request.data['post'] = post.id
-        serializer = CommentSerializer(data = request.data)
+        serializer = CommentSerializer(data = {
+            "writer" : user.id,
+            "post": post.id,
+            "content":request.data["content"]
+            })
         notice = NoticeSerializer(data={
                 "user":post.writer.id,
                 "userfrom":user.username,
