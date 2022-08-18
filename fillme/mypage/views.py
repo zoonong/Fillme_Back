@@ -54,15 +54,18 @@ def my_persona_list_create(request):
     user = request.user
     profile = user.profile
     if request.method=="POST":
-        serializer = PersonaSerializer(data={
-            'user':user.id,
-            'profile':profile.id,
-            'name':request.data['name'],
-            'category':request.data['category'],
-            'image':request.data['image']})
-        if serializer.is_valid(raise_exception=True):
-            serializer.save() 
-        return Response(serializer.data)
+        if user.persona_set.all().count() < 5:
+            serializer = PersonaSerializer(data={
+                'user':user.id,
+                'profile':profile.id,
+                'name':request.data['name'],
+                'category':request.data['category'],
+                'image':request.data['image']})
+            if serializer.is_valid(raise_exception=True):
+                serializer.save() 
+            return Response(serializer.data)
+        else:
+            return Response({"warning":"페르소나는 최대 4개까지 생성 가능합니다."})
     elif request.method == 'GET':
         personas = user.persona_set.all()
         serializer = PersonaSerializer(personas, many=True)
