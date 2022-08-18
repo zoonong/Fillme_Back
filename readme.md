@@ -1343,7 +1343,8 @@
         "userfrom":"내 게시물을 좋아요 누른사람 계정 아이디",
         "userto":"내 게시물의 페르소나 이름"
         "text":"님의 게시물을 좋아합니다.",
-        "content":null
+        "content":null,
+        "calculatedtime":"1시간 이내면 n분 전/ 하루 이내면 n시간 전/ 일주일 이내면 n일 전/ 나머지 n월 m일"
     }
 #### 팔로우 알림
     {
