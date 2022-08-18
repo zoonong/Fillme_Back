@@ -54,7 +54,7 @@ def my_persona_list_create(request):
     user = request.user
     profile = user.profile
     if request.method=="POST":
-        if user.persona_set.all().count() < 5:
+        if user.persona_set.all().count() <= 4:
             serializer = PersonaSerializer(data={
                 'user':user.id,
                 'profile':profile.id,
