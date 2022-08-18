@@ -5,7 +5,7 @@ from mypage.models import Persona
 # Create your models here.
 class Post(models.Model):
     id = models.AutoField(primary_key = True)
-    writer = models.ForeignKey(User, null = True, blank = True, on_delete = models.CASCADE)
+    writer = models.ForeignKey(User, null = True, on_delete = models.CASCADE)
     persona = models.ForeignKey(Persona, on_delete = models.CASCADE)
     title = models.CharField(max_length = 200)
     content = models.TextField()
