@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import *
 from notice.serializers import *
+from notice.models import *
 from .models import *
 from accounts.models import *
 from rest_framework.decorators import permission_classes
@@ -275,3 +276,25 @@ def persona_follow(request,persona_id):
     elif request.method == 'GET':
         serializer = FollowingSerializer(user.profile)
         return Response(data=serializer.data)
+
+# New feelings 조회기능
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def new_feelings(request):
+    user = request.user
+    followings = user.profile.followings.all()
+    subfollowings = user.profile.subfollowings.all()
+    feelingList = []
+    
+    if request.method == 'GET':
+        for follow in followings:
+            personas = follow.user.persona_set.all()
+            notice = Notice.objects.filter(userfrom=user.username, text="님을 팔로우하기 시작했습니다.", user = follow.user).order_by("-created_at")
+            for persona in personas:
+                if persona.created_at > notice[0].created_at:
+                    new = PersonaSerializer(persona)
+                    feelingList.append(new.data)
+        serializer = sorted(feelingList, key = lambda k: k.get('created_at', 0), reverse = True)
+        return Response(serializer)
+        
+    
