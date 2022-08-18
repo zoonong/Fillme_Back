@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import *
+from notice.serializers import *
 from .models import *
 from accounts.models import *
 from rest_framework.decorators import permission_classes
@@ -186,6 +187,7 @@ def my_following_list(request):
     if request.method == 'GET':
         serializer = FollowingSerializer(user.profile)
         return Response(data=serializer.data)
+
 # 특정 유저의 팔로잉 목록 조회
 @api_view(['GET'])
 @permission_classes([IsAuthenticatedOrReadOnly])
@@ -215,9 +217,18 @@ def follow(request,user_id):
             serializer = FollowingSerializer(user.profile, data=user.profile)
         else:
             user.profile.followings.add(followed_user.profile)
+            notice = NoticeSerializer(data={
+                "user":followed_user.id,
+                "userfrom":user.username,
+                "userto":"회원",
+                "text":"님을 팔로우하기 시작했습니다.",
+                "content":"null"
+            })
             for i in range(followed_user.persona_set.all().count()):
                 user.profile.subfollowings.add(follower_subs[i])
             serializer = FollowingSerializer(user.profile, data = user.profile)
+        if notice.is_valid():
+            notice.save()
         if serializer.is_valid():
             serializer.save()
         serializer = FollowingSerializer(user.profile)
