@@ -110,12 +110,17 @@ def video_post_update_delete(request, post_pk):
 def following_post_list(request):
     user = request.user # 로그인한 유저(= 나) 정보 불러 오기
     followings = user.profile.followings.all() # 내가 팔로우한 유저들 불러 오기
+    postList = []
 
     if request.method == 'GET':
         for following in followings:
             posts = Post.objects.filter(writer = following.user)
-            serializer = AllPostSerializer(posts, many = True)
-        return Response(serializer.data)
+            followingPost = AllPostSerializer(posts, many = True)
+            postData = list(followingPost.data)
+            for data in postData:
+                postList.append(data)
+        serializer = sorted(postList, key = lambda k: k.get('createDate', 0), reverse = True)
+        return Response(serializer)
 
 # 2. 내가 작성한 게시글 목록을 조회하는 api
 @api_view(['GET'])
@@ -171,15 +176,20 @@ def user_persona_post_list(request, user_id, persona_id):
 # 6. 내가 소식받기한 페르소나의 게시글만 조회하는 api
 @api_view(['GET'])
 @permission_classes([IsAuthenticatedOrReadOnly])
-def persona_follow_post_list(request, persona_id):
+def subfollowing_post_list(request):
     user = request.user # 로그인한 유저(= 나) 정보 불러 오기
     subfollowings = user.profile.subfollowings.all() # 내가 팔로우한 유저들 불러 오기
+    postList = []
 
     if request.method == 'GET':
-        for following in subfollowings:
-            posts = get_object_or_404(Post.objects.filter(writer = following.user), pk = persona_id)
-            serializer = AllPostSerializer(posts, many = True)
-        return Response(serializer.data)
+        for subfollowing in subfollowings:
+            posts = Post.objects.filter(persona = subfollowing)
+            followingPost = AllPostSerializer(posts, many = True)
+            postData = list(followingPost.data)
+            for data in postData:
+                postList.append(data)
+        serializer = sorted(postList, key = lambda k: k.get('createDate', 0), reverse = True)
+        return Response(serializer)
 
 
 # COMMENT(댓글) 관련
