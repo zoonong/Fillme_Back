@@ -17,9 +17,15 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class PersonaSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source = 'user.username')
+    color_hex = serializers.SerializerMethodField(method_name='getColorhex')
+
     class Meta:
         model = Persona
-        fields = ['id','user','username','profile','name','category','image','openpublic']
+        fields = ['id','user','username','profile','name','category','image','openpublic', 'coloer_hex']
+
+    def getColorhex(self, obj):
+      persona = obj
+      return persona.user.profile.get_color_display()
 
 class ProfilepersonaSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source = 'user.username')

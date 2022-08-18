@@ -129,8 +129,9 @@
             "profile": "profile id 값",
             "name": "persona 1 이름",
             "category": "persona 1 카테고리",
-            "image": "persona 1 이미지"
-            "openpublic": true
+            "image": "persona 1 이미지",
+            "openpublic": true,
+            "color_hex" : "색상 hex값"
         },
         {
             "id": "persona id 값",
@@ -139,8 +140,9 @@
             "profile": "profile id 값",
             "name": "persona 2 이름",
             "category": "persona 2 카테고리",
-            "image": "persona 2 이미지"
-            "openpublic": true
+            "image": "persona 2 이미지",
+            "openpublic": true,
+            "color_hex" : "색상 hex값"
         }
     ]
 
@@ -163,7 +165,8 @@
         "name": "persona 2 이름",
         "category": "persona 2 카테고리",
         "image": "persona 2 이미지",
-        "openpublic": true
+        "openpublic": true,
+        "color_hex" : "색상 hex값"
     }
 
 ### 본인 페르소나 수정하기
@@ -193,7 +196,8 @@
             "name": "persona 1 이름",
             "category": "persona 1 카테고리",
             "image": "persona 1 이미지",
-            "openpublic": true
+            "openpublic": true,
+            "color_hex" : "색상 hex값"
         },
         {
             "id": "persona id 값",
@@ -203,7 +207,8 @@
             "name": "persona 2 이름",
             "category": "persona 2 카테고리",
             "image": "persona 2 이미지",
-            "openpublic": true
+            "openpublic": true,
+            "color_hex" : "색상 hex값"
         }
     ]
 
@@ -218,7 +223,8 @@
         "name": "persona 1 이름",
         "category": "persona 1 카테고리",
         "image": "persona 1 이미지",
-        "openpublic": true
+        "openpublic": true,
+        "color_hex" : "색상 hex값"
     }
 
 ### 나의 페르소나 공개 여부 설정(persona detail)
